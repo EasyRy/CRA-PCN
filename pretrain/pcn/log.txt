@@ -1,0 +1,921 @@
+Loaded compiled 3D CUDA chamfer distance
+cuda available  True
+  0%|          | 0/3795 [00:00<?, ?it/s]                                          0%|          | 0/1322 [00:00<?, ?it/s]                                          0%|          | 0/5677 [00:00<?, ?it/s]                                          0%|          | 0/5750 [00:00<?, ?it/s]                                          0%|          | 0/2068 [00:00<?, ?it/s]                                          0%|          | 0/2923 [00:00<?, ?it/s]                                          0%|          | 0/5750 [00:00<?, ?it/s]                                          0%|          | 0/1689 [00:00<?, ?it/s]                                          0%|          | 0/150 [00:00<?, ?it/s]                                         0%|          | 0/150 [00:00<?, ?it/s]                                         0%|          | 0/150 [00:00<?, ?it/s]                                         0%|          | 0/150 [00:00<?, ?it/s]                                         0%|          | 0/150 [00:00<?, ?it/s]                                         0%|          | 0/150 [00:00<?, ?it/s]                                         0%|          | 0/150 [00:00<?, ?it/s]                                         0%|          | 0/150 [00:00<?, ?it/s]                                       Saving outdir: results/decouple/train_pcn_Log_2023_12_29_02_48_29
+{'CONST': {'DEVICE': '0, 1', 'NUM_WORKERS': 8, 'N_INPUT_POINTS': 2048},
+ 'DATASET': {'TEST_DATASET': 'ShapeNet', 'TRAIN_DATASET': 'ShapeNet'},
+ 'DATASETS': {'COMPLETION3D': {'CATEGORY_FILE_PATH': './datasets/Completion3D.json',
+                               'COMPLETE_POINTS_PATH': '/path/to/datasets/Completion3D/%s/gt/%s/%s.h5',
+                               'PARTIAL_POINTS_PATH': '/path/to/datasets/Completion3D/%s/partial/%s/%s.h5'},
+              'SHAPENET': {'CATEGORY_FILE_PATH': './datasets/ShapeNet.json',
+                           'COMPLETE_POINTS_PATH': '../data/PCN/%s/complete/%s/%s.pcd',
+                           'N_POINTS': 2048,
+                           'N_RENDERINGS': 8,
+                           'PARTIAL_POINTS_PATH': '../data/PCN/%s/partial/%s/%s/%02d.pcd'}},
+ 'DIR': {'CHECKPOINTS': 'results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints',
+         'LOGS': 'results/decouple/train_pcn_Log_2023_12_29_02_48_29',
+         'OUT_PATH': 'results/decouple/train_pcn_Log_2023_12_29_02_48_29',
+         'TEST_PATH': 'test/Try'},
+ 'NETWORK': {'KP_EXTENTS': [0.1, 0.1, 0.05, 0.025],
+             'UPSAMPLE_FACTORS': [2, 2, 1, 8]},
+ 'TEST': {'METRIC_NAME': 'ChamferDistance'},
+ 'TRAIN': {'BATCH_SIZE': 60,
+           'BETAS': [0.9, 0.999],
+           'GAMMA': 0.5,
+           'LEARNING_RATE': 0.001,
+           'LR_DECAY': 150,
+           'LR_DECAY_STEP': 50,
+           'LR_MILESTONES': [50, 100, 150, 200, 250],
+           'N_EPOCHS': 400,
+           'SAVE_FREQ': 25,
+           'WARMUP_EPOCHS': 20,
+           'WARMUP_STEPS': 200,
+           'WEIGHT_DECAY': 0}}
+Training Record:
+n_itr, cd_pc, cd_p1, cd_p2, cd_p3, partial_matching
+Testing Record:
+#epoch cdc cd1 cd2 partial_matching | cd3 | #best_epoch best_metrics
+/home/data6/rongyi/miniconda3/envs/pcc/lib/python3.6/site-packages/torch/optim/lr_scheduler.py:134: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+[Epoch 1/400] LearningRate = 0.000050 EpochTime = 760.024 (s) Losses = ['58.1783', '34.0592', '26.5497', '18.4632', '58.1783']
+#1 41.5746 30.0470 22.2298 41.5746 | 14.6893 | #0 inf
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 2/400] LearningRate = 0.000100 EpochTime = 721.472 (s) Losses = ['38.2221', '27.1401', '19.2821', '12.6421', '38.2221']
+#2 36.9005 26.7837 19.0364 36.9005 | 12.4015 | #1 14.6893
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 3/400] LearningRate = 0.000150 EpochTime = 719.568 (s) Losses = ['35.7389', '25.6241', '17.8722', '11.5972', '35.7389']
+#3 34.9427 25.4600 17.8226 34.9427 | 11.4334 | #2 12.4015
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 4/400] LearningRate = 0.000200 EpochTime = 720.811 (s) Losses = ['34.4548', '24.7839', '17.0592', '10.9240', '34.4548']
+#4 34.3189 24.9733 17.3524 34.3189 | 11.1213 | #3 11.4334
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 5/400] LearningRate = 0.000250 EpochTime = 721.424 (s) Losses = ['33.6172', '24.1713', '16.4179', '10.3532', '33.6172']
+#5 33.3037 23.9144 16.1508 33.3037 | 10.1574 | #4 11.1213
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 6/400] LearningRate = 0.000300 EpochTime = 720.706 (s) Losses = ['32.9545', '23.7700', '15.9691', '9.9363', '32.9545']
+#6 32.7224 23.9635 16.1884 32.7224 | 10.1437 | #5 10.1574
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 7/400] LearningRate = 0.000350 EpochTime = 722.486 (s) Losses = ['32.5798', '23.4490', '15.6158', '9.6118', '32.5798']
+#7 32.1970 23.3878 15.6453 32.1970 | 9.6806 | #6 10.1437
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 8/400] LearningRate = 0.000400 EpochTime = 725.755 (s) Losses = ['32.1452', '23.1825', '15.3245', '9.3426', '32.1452']
+#8 32.0281 23.5558 15.7004 32.0281 | 9.5709 | #7 9.6806
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 9/400] LearningRate = 0.000450 EpochTime = 722.917 (s) Losses = ['31.9540', '23.0857', '15.1930', '9.2147', '31.9540']
+#9 32.2547 23.1546 15.2852 32.2547 | 9.4203 | #8 9.5709
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 10/400] LearningRate = 0.000500 EpochTime = 722.569 (s) Losses = ['31.4894', '22.8337', '14.9273', '9.0029', '31.4894']
+#10 31.7563 22.9254 14.9373 31.7563 | 9.1804 | #9 9.4203
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 11/400] LearningRate = 0.000550 EpochTime = 719.416 (s) Losses = ['31.3468', '22.7035', '14.7672', '8.8703', '31.3468']
+#11 31.2767 22.9550 15.0115 31.2767 | 9.1393 | #10 9.1804
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 12/400] LearningRate = 0.000600 EpochTime = 720.806 (s) Losses = ['31.0990', '22.5214', '14.5692', '8.6877', '31.0990']
+#12 31.5826 23.1717 15.1209 31.5826 | 9.0688 | #11 9.1393
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 13/400] LearningRate = 0.000650 EpochTime = 720.091 (s) Losses = ['31.1894', '22.5208', '14.5353', '8.6443', '31.1894']
+#13 31.6019 22.9073 15.0935 31.6019 | 9.0958 | #12 9.0688
+[Epoch 14/400] LearningRate = 0.000700 EpochTime = 716.561 (s) Losses = ['31.0224', '22.4411', '14.4348', '8.5599', '31.0224']
+#14 32.1010 23.2673 15.3100 32.1010 | 9.4429 | #12 9.0688
+[Epoch 15/400] LearningRate = 0.000750 EpochTime = 720.339 (s) Losses = ['30.9509', '22.3627', '14.3377', '8.4615', '30.9509']
+#15 32.6134 22.9595 14.8261 32.6134 | 8.7714 | #12 9.0688
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 16/400] LearningRate = 0.000800 EpochTime = 720.612 (s) Losses = ['30.8649', '22.2875', '14.2387', '8.3847', '30.8649']
+#16 31.2226 22.3553 14.3579 31.2226 | 8.4610 | #15 8.7714
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 17/400] LearningRate = 0.000850 EpochTime = 716.940 (s) Losses = ['30.8045', '22.2002', '14.1479', '8.3078', '30.8045']
+#17 31.9631 22.3434 14.2561 31.9631 | 8.4353 | #16 8.4610
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 18/400] LearningRate = 0.000900 EpochTime = 719.791 (s) Losses = ['31.1265', '22.3222', '14.2221', '8.3442', '31.1265']
+#18 32.5882 22.8947 14.6610 32.5882 | 8.7395 | #17 8.4353
+[Epoch 19/400] LearningRate = 0.000950 EpochTime = 719.790 (s) Losses = ['30.9579', '22.2947', '14.1913', '8.3233', '30.9579']
+#19 32.2335 22.6655 14.5109 32.2335 | 8.8596 | #17 8.4353
+[Epoch 20/400] LearningRate = 0.001000 EpochTime = 722.743 (s) Losses = ['30.8548', '22.2021', '14.0850', '8.2209', '30.8548']
+#20 30.6992 22.2059 14.0683 30.6992 | 8.2886 | #17 8.4353
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 21/400] LearningRate = 0.001000 EpochTime = 717.049 (s) Losses = ['30.5300', '22.0436', '13.9583', '8.1297', '30.5300']
+#21 31.9291 22.7345 14.5039 31.9291 | 8.7147 | #20 8.2886
+[Epoch 22/400] LearningRate = 0.000985 EpochTime = 724.181 (s) Losses = ['30.2312', '21.9163', '13.8276', '8.0434', '30.2312']
+#22 30.3473 22.2143 14.1208 30.3473 | 8.3656 | #20 8.2886
+[Epoch 23/400] LearningRate = 0.000970 EpochTime = 724.635 (s) Losses = ['30.1540', '21.8237', '13.7431', '7.9555', '30.1540']
+#23 31.5597 22.4361 14.1911 31.5597 | 8.4104 | #20 8.2886
+[Epoch 24/400] LearningRate = 0.000955 EpochTime = 728.499 (s) Losses = ['29.9391', '21.7357', '13.6420', '7.8749', '29.9391']
+#24 30.1414 21.8492 13.7612 30.1414 | 8.0530 | #20 8.2886
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 25/400] LearningRate = 0.000940 EpochTime = 725.970 (s) Losses = ['29.8734', '21.6997', '13.6074', '7.8518', '29.8734']
+#25 30.7979 22.3209 14.1349 30.7979 | 8.2619 | #24 8.0530
+[Epoch 26/400] LearningRate = 0.000926 EpochTime = 724.743 (s) Losses = ['30.4351', '21.8872', '13.7198', '7.9251', '30.4351']
+#26 30.7581 21.9977 13.8278 30.7581 | 8.1821 | #24 8.0530
+[Epoch 27/400] LearningRate = 0.000912 EpochTime = 726.520 (s) Losses = ['29.8588', '21.6391', '13.5105', '7.7611', '29.8588']
+#27 31.2191 21.9338 13.8102 31.2191 | 8.1487 | #24 8.0530
+[Epoch 28/400] LearningRate = 0.000898 EpochTime = 723.881 (s) Losses = ['29.5937', '21.5575', '13.4354', '7.7002', '29.5937']
+#28 29.8731 21.7648 13.6729 29.8731 | 7.9727 | #24 8.0530
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 29/400] LearningRate = 0.000884 EpochTime = 726.327 (s) Losses = ['29.5494', '21.5032', '13.3959', '7.6735', '29.5494']
+#29 30.4669 22.0935 13.8856 30.4669 | 8.0311 | #28 7.9727
+[Epoch 30/400] LearningRate = 0.000871 EpochTime = 725.171 (s) Losses = ['29.4929', '21.4467', '13.3402', '7.6443', '29.4929']
+#30 30.5628 21.7708 13.8179 30.5628 | 8.0433 | #28 7.9727
+[Epoch 31/400] LearningRate = 0.000858 EpochTime = 724.035 (s) Losses = ['29.4550', '21.4282', '13.3220', '7.6236', '29.4550']
+#31 29.7785 21.6518 13.5738 29.7785 | 7.9028 | #28 7.9727
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 32/400] LearningRate = 0.000845 EpochTime = 724.533 (s) Losses = ['29.4669', '21.4399', '13.3219', '7.6129', '29.4669']
+#32 29.5264 21.3785 13.3331 29.5264 | 7.7342 | #31 7.9028
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 33/400] LearningRate = 0.000832 EpochTime = 723.978 (s) Losses = ['29.3318', '21.3296', '13.2311', '7.5562', '29.3318']
+#33 29.9187 21.6539 13.4741 29.9187 | 7.8075 | #32 7.7342
+[Epoch 34/400] LearningRate = 0.000819 EpochTime = 716.449 (s) Losses = ['29.4042', '21.4052', '13.2739', '7.5714', '29.4042']
+#34 30.0004 21.7465 13.5406 30.0004 | 7.8209 | #32 7.7342
+[Epoch 35/400] LearningRate = 0.000807 EpochTime = 721.029 (s) Losses = ['29.2560', '21.3159', '13.2029', '7.5125', '29.2560']
+#35 29.6444 21.4046 13.3955 29.6444 | 7.7310 | #32 7.7342
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 36/400] LearningRate = 0.000794 EpochTime = 725.496 (s) Losses = ['29.0886', '21.2222', '13.1189', '7.4574', '29.0886']
+#36 30.0334 21.7187 13.5306 30.0334 | 7.7414 | #35 7.7310
+[Epoch 37/400] LearningRate = 0.000782 EpochTime = 721.501 (s) Losses = ['29.5880', '21.3903', '13.2430', '7.5628', '29.5880']
+#37 29.7636 21.5052 13.3617 29.7636 | 7.7627 | #35 7.7310
+[Epoch 38/400] LearningRate = 0.000770 EpochTime = 724.578 (s) Losses = ['29.0149', '21.1633', '13.0462', '7.3943', '29.0149']
+#38 29.2523 21.2924 13.2177 29.2523 | 7.5746 | #35 7.7310
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 39/400] LearningRate = 0.000759 EpochTime = 727.310 (s) Losses = ['28.9498', '21.1522', '13.0388', '7.3850', '28.9498']
+#39 29.0718 21.1725 13.1140 29.0718 | 7.5628 | #38 7.5746
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 40/400] LearningRate = 0.000747 EpochTime = 725.340 (s) Losses = ['28.8415', '21.0739', '12.9930', '7.3678', '28.8415']
+#40 28.9153 21.4106 13.2907 28.9153 | 7.6296 | #39 7.5628
+[Epoch 41/400] LearningRate = 0.000736 EpochTime = 725.797 (s) Losses = ['28.8035', '21.0392', '12.9614', '7.3442', '28.8035']
+#41 29.3293 20.9980 13.0473 29.3293 | 7.5676 | #39 7.5628
+[Epoch 42/400] LearningRate = 0.000724 EpochTime = 723.068 (s) Losses = ['28.7905', '21.0376', '12.9466', '7.3140', '28.7905']
+#42 29.1709 21.1917 13.2096 29.1709 | 7.5560 | #39 7.5628
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 43/400] LearningRate = 0.000713 EpochTime = 722.033 (s) Losses = ['28.7236', '20.9902', '12.9057', '7.2853', '28.7236']
+#43 29.1060 21.3019 13.2170 29.1060 | 7.6591 | #42 7.5560
+[Epoch 44/400] LearningRate = 0.000703 EpochTime = 722.887 (s) Losses = ['28.7626', '21.0089', '12.9013', '7.2729', '28.7626']
+#44 28.9662 21.0601 13.0059 28.9662 | 7.4519 | #42 7.5560
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 45/400] LearningRate = 0.000692 EpochTime = 725.244 (s) Losses = ['28.7807', '21.0027', '12.9139', '7.2959', '28.7807']
+#45 28.8427 20.9723 12.9108 28.8427 | 7.3262 | #44 7.4519
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 46/400] LearningRate = 0.000681 EpochTime = 722.554 (s) Losses = ['28.7460', '20.9819', '12.8859', '7.2641', '28.7460']
+#46 29.0062 21.1368 12.9450 29.0062 | 7.4202 | #45 7.3262
+[Epoch 47/400] LearningRate = 0.000671 EpochTime = 719.967 (s) Losses = ['28.5211', '20.8736', '12.7978', '7.1998', '28.5211']
+#47 29.1904 21.0161 12.9427 29.1904 | 7.3979 | #45 7.3262
+[Epoch 48/400] LearningRate = 0.000661 EpochTime = 720.442 (s) Losses = ['28.5209', '20.8642', '12.7835', '7.1860', '28.5209']
+#48 29.1378 20.9660 12.8536 29.1378 | 7.3680 | #45 7.3262
+[Epoch 49/400] LearningRate = 0.000651 EpochTime = 727.392 (s) Losses = ['28.6049', '20.9155', '12.8203', '7.2099', '28.6049']
+#49 28.5202 20.8712 12.7734 28.5202 | 7.2624 | #45 7.3262
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 50/400] LearningRate = 0.000641 EpochTime = 729.713 (s) Losses = ['28.5330', '20.8454', '12.7702', '7.1678', '28.5330']
+#50 29.2032 20.9677 12.9305 29.2032 | 7.3812 | #49 7.2624
+[Epoch 51/400] LearningRate = 0.000631 EpochTime = 720.680 (s) Losses = ['28.4142', '20.8132', '12.7385', '7.1464', '28.4142']
+#51 28.8169 21.0376 12.9589 28.8169 | 7.4200 | #49 7.2624
+[Epoch 52/400] LearningRate = 0.000621 EpochTime = 721.398 (s) Losses = ['28.4573', '20.7996', '12.7274', '7.1470', '28.4573']
+#52 30.1757 21.6025 13.2093 30.1757 | 7.4796 | #49 7.2624
+[Epoch 53/400] LearningRate = 0.000612 EpochTime = 721.413 (s) Losses = ['28.6557', '20.8977', '12.7970', '7.1805', '28.6557']
+#53 28.9016 20.8793 12.8192 28.9016 | 7.2640 | #49 7.2624
+[Epoch 54/400] LearningRate = 0.000603 EpochTime = 722.147 (s) Losses = ['28.4465', '20.7955', '12.7165', '7.1243', '28.4465']
+#54 28.7729 20.9229 12.8276 28.7729 | 7.2986 | #49 7.2624
+[Epoch 55/400] LearningRate = 0.000593 EpochTime = 722.372 (s) Losses = ['28.3121', '20.7447', '12.6799', '7.0980', '28.3121']
+#55 28.4239 20.7781 12.7546 28.4239 | 7.2345 | #49 7.2624
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 56/400] LearningRate = 0.000584 EpochTime = 717.638 (s) Losses = ['28.2683', '20.6849', '12.6280', '7.0589', '28.2683']
+#56 28.5948 20.7351 12.7067 28.5948 | 7.2189 | #55 7.2345
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 57/400] LearningRate = 0.000575 EpochTime = 722.309 (s) Losses = ['28.3054', '20.7310', '12.6842', '7.0957', '28.3054']
+#57 28.3487 20.7992 12.7564 28.3487 | 7.2827 | #56 7.2189
+[Epoch 58/400] LearningRate = 0.000567 EpochTime = 719.951 (s) Losses = ['28.2523', '20.6783', '12.6192', '7.0461', '28.2523']
+#58 29.0026 20.9386 12.8490 29.0026 | 7.2905 | #56 7.2189
+[Epoch 59/400] LearningRate = 0.000558 EpochTime = 724.179 (s) Losses = ['28.1979', '20.6281', '12.5855', '7.0183', '28.1979']
+#59 28.2137 20.6732 12.6452 28.2137 | 7.1910 | #56 7.2189
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 60/400] LearningRate = 0.000550 EpochTime = 721.788 (s) Losses = ['28.2089', '20.6335', '12.5961', '7.0262', '28.2089']
+#60 28.4944 20.6901 12.6800 28.4944 | 7.1637 | #59 7.1910
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 61/400] LearningRate = 0.000541 EpochTime = 724.351 (s) Losses = ['28.0929', '20.5813', '12.5521', '6.9943', '28.0929']
+#61 28.3461 20.5994 12.6171 28.3461 | 7.2023 | #60 7.1637
+[Epoch 62/400] LearningRate = 0.000533 EpochTime = 721.874 (s) Losses = ['28.3104', '20.6801', '12.6145', '7.0367', '28.3104']
+#62 28.3798 20.6711 12.6554 28.3798 | 7.1893 | #60 7.1637
+[Epoch 63/400] LearningRate = 0.000525 EpochTime = 722.788 (s) Losses = ['28.3708', '20.6964', '12.6043', '7.0200', '28.3708']
+#63 30.1994 21.3890 13.1947 30.1994 | 7.5876 | #60 7.1637
+[Epoch 64/400] LearningRate = 0.000517 EpochTime = 723.015 (s) Losses = ['28.3456', '20.7251', '12.6376', '7.0394', '28.3456']
+#64 28.2396 20.6714 12.6410 28.2396 | 7.1603 | #60 7.1637
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 65/400] LearningRate = 0.000509 EpochTime = 716.950 (s) Losses = ['28.1662', '20.6036', '12.5409', '6.9666', '28.1662']
+#65 28.0880 20.6459 12.6304 28.0880 | 7.1391 | #64 7.1603
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 66/400] LearningRate = 0.000501 EpochTime = 724.049 (s) Losses = ['28.0313', '20.5396', '12.4890', '6.9358', '28.0313']
+#66 28.3002 20.7511 12.6759 28.3002 | 7.1228 | #65 7.1391
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 67/400] LearningRate = 0.000494 EpochTime = 723.222 (s) Losses = ['28.2297', '20.5970', '12.5377', '6.9703', '28.2297']
+#67 28.8375 20.8356 12.7179 28.8375 | 7.1486 | #66 7.1228
+[Epoch 68/400] LearningRate = 0.000486 EpochTime = 720.332 (s) Losses = ['28.0965', '20.5668', '12.5105', '6.9510', '28.0965']
+#68 28.1193 20.5895 12.5751 28.1193 | 7.0833 | #66 7.1228
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 69/400] LearningRate = 0.000479 EpochTime = 723.781 (s) Losses = ['28.1008', '20.5897', '12.5432', '6.9725', '28.1008']
+#69 28.3124 20.5786 12.6022 28.3124 | 7.1054 | #68 7.0833
+[Epoch 70/400] LearningRate = 0.000471 EpochTime = 721.613 (s) Losses = ['28.0143', '20.5214', '12.4786', '6.9222', '28.0143']
+#70 28.2479 20.5752 12.5335 28.2479 | 7.0278 | #68 7.0833
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 71/400] LearningRate = 0.000464 EpochTime = 721.706 (s) Losses = ['27.9247', '20.4531', '12.4239', '6.8814', '27.9247']
+#71 28.1008 20.5830 12.6503 28.1008 | 7.0891 | #70 7.0278
+[Epoch 72/400] LearningRate = 0.000457 EpochTime = 720.886 (s) Losses = ['28.0117', '20.4864', '12.4422', '6.8977', '28.0117']
+#72 28.2880 20.5756 12.5390 28.2880 | 7.0877 | #70 7.0278
+[Epoch 73/400] LearningRate = 0.000450 EpochTime = 722.067 (s) Losses = ['28.0232', '20.5188', '12.4642', '6.9073', '28.0232']
+#73 28.1396 20.5549 12.5574 28.1396 | 7.1164 | #70 7.0278
+[Epoch 74/400] LearningRate = 0.000443 EpochTime = 723.729 (s) Losses = ['27.7842', '20.4171', '12.3901', '6.8521', '27.7842']
+#74 27.9804 20.4310 12.4134 27.9804 | 6.9916 | #70 7.0278
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 75/400] LearningRate = 0.000437 EpochTime = 724.951 (s) Losses = ['27.9550', '20.4486', '12.4219', '6.8767', '27.9550']
+#75 28.1243 20.5197 12.5177 28.1243 | 7.0444 | #74 6.9916
+[Epoch 76/400] LearningRate = 0.000430 EpochTime = 725.345 (s) Losses = ['27.9319', '20.4579', '12.4240', '6.8700', '27.9319']
+#76 27.9535 20.4745 12.4380 27.9535 | 6.9611 | #74 6.9916
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 77/400] LearningRate = 0.000423 EpochTime = 721.285 (s) Losses = ['27.8611', '20.4086', '12.3852', '6.8451', '27.8611']
+#77 28.0088 20.4880 12.4469 28.0088 | 6.9657 | #76 6.9611
+[Epoch 78/400] LearningRate = 0.000417 EpochTime = 720.072 (s) Losses = ['27.8600', '20.3968', '12.3760', '6.8445', '27.8600']
+#78 27.8276 20.3532 12.4020 27.8276 | 7.0216 | #76 6.9611
+[Epoch 79/400] LearningRate = 0.000411 EpochTime = 725.875 (s) Losses = ['27.8796', '20.4416', '12.3942', '6.8408', '27.8796']
+#79 27.7195 20.3776 12.3488 27.7195 | 6.9223 | #76 6.9611
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 80/400] LearningRate = 0.000404 EpochTime = 723.413 (s) Losses = ['27.8420', '20.3833', '12.3623', '6.8304', '27.8420']
+#80 27.8292 20.3924 12.4053 27.8292 | 6.9782 | #79 6.9223
+[Epoch 81/400] LearningRate = 0.000398 EpochTime = 723.267 (s) Losses = ['27.8121', '20.3568', '12.3414', '6.8096', '27.8121']
+#81 28.0856 20.5779 12.5203 28.0856 | 7.0000 | #79 6.9223
+[Epoch 82/400] LearningRate = 0.000392 EpochTime = 725.445 (s) Losses = ['27.8284', '20.3718', '12.3388', '6.8007', '27.8284']
+#82 28.1134 20.4687 12.4140 28.1134 | 6.9193 | #79 6.9223
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 83/400] LearningRate = 0.000386 EpochTime = 723.139 (s) Losses = ['27.9109', '20.3870', '12.3542', '6.8152', '27.9109']
+#83 28.0595 20.4300 12.4423 28.0595 | 7.0126 | #82 6.9193
+[Epoch 84/400] LearningRate = 0.000380 EpochTime = 724.022 (s) Losses = ['27.9343', '20.4171', '12.3714', '6.8230', '27.9343']
+#84 27.8709 20.3762 12.4439 27.8709 | 6.9922 | #82 6.9193
+[Epoch 85/400] LearningRate = 0.000374 EpochTime = 719.642 (s) Losses = ['27.6469', '20.2934', '12.2856', '6.7690', '27.6469']
+#85 27.7709 20.3729 12.3929 27.7709 | 6.9323 | #82 6.9193
+[Epoch 86/400] LearningRate = 0.000369 EpochTime = 724.715 (s) Losses = ['27.8905', '20.3680', '12.3367', '6.8062', '27.8905']
+#86 27.5507 20.2512 12.3265 27.5507 | 6.9164 | #82 6.9193
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 87/400] LearningRate = 0.000363 EpochTime = 720.706 (s) Losses = ['27.8388', '20.3476', '12.3257', '6.7922', '27.8388']
+#87 27.5675 20.2778 12.3195 27.5675 | 6.8773 | #86 6.9164
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 88/400] LearningRate = 0.000358 EpochTime = 723.494 (s) Losses = ['27.6141', '20.2742', '12.2718', '6.7535', '27.6141']
+#88 27.6780 20.2762 12.3101 27.6780 | 6.8874 | #87 6.8773
+[Epoch 89/400] LearningRate = 0.000352 EpochTime = 722.756 (s) Losses = ['27.6665', '20.3035', '12.2930', '6.7635', '27.6665']
+#89 27.8603 20.3905 12.3975 27.8603 | 6.9335 | #87 6.8773
+[Epoch 90/400] LearningRate = 0.000347 EpochTime = 721.651 (s) Losses = ['27.6419', '20.2399', '12.2422', '6.7303', '27.6419']
+#90 27.7209 20.2589 12.3172 27.7209 | 6.8883 | #87 6.8773
+[Epoch 91/400] LearningRate = 0.000341 EpochTime = 719.921 (s) Losses = ['27.5520', '20.2222', '12.2317', '6.7246', '27.5520']
+#91 27.4782 20.2662 12.3061 27.4782 | 6.8769 | #87 6.8773
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 92/400] LearningRate = 0.000336 EpochTime = 728.629 (s) Losses = ['27.6400', '20.2517', '12.2554', '6.7380', '27.6400']
+#92 27.7507 20.3365 12.3396 27.7507 | 6.8873 | #91 6.8769
+[Epoch 93/400] LearningRate = 0.000331 EpochTime = 727.173 (s) Losses = ['27.8094', '20.2911', '12.2748', '6.7578', '27.8094']
+#93 28.3464 20.4272 12.3808 28.3464 | 6.9113 | #91 6.8769
+[Epoch 94/400] LearningRate = 0.000326 EpochTime = 724.547 (s) Losses = ['27.6967', '20.2532', '12.2372', '6.7229', '27.6967']
+#94 27.9295 20.3214 12.3409 27.9295 | 6.8941 | #91 6.8769
+[Epoch 95/400] LearningRate = 0.000321 EpochTime = 727.584 (s) Losses = ['27.5348', '20.1899', '12.1968', '6.6918', '27.5348']
+#95 27.8424 20.3796 12.3654 27.8424 | 6.9157 | #91 6.8769
+[Epoch 96/400] LearningRate = 0.000316 EpochTime = 725.354 (s) Losses = ['27.4986', '20.1593', '12.1774', '6.6780', '27.4986']
+#96 27.5559 20.1475 12.2274 27.5559 | 6.8015 | #91 6.8769
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 97/400] LearningRate = 0.000311 EpochTime = 728.169 (s) Losses = ['27.5893', '20.2068', '12.2101', '6.7039', '27.5893']
+#97 27.6524 20.2837 12.3394 27.6524 | 6.9147 | #96 6.8015
+[Epoch 98/400] LearningRate = 0.000307 EpochTime = 726.915 (s) Losses = ['27.5042', '20.1591', '12.1810', '6.6803', '27.5042']
+#98 27.5948 20.1459 12.1792 27.5948 | 6.7866 | #96 6.8015
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 99/400] LearningRate = 0.000302 EpochTime = 727.026 (s) Losses = ['27.5533', '20.2070', '12.2063', '6.6965', '27.5533']
+#99 27.5615 20.2281 12.2592 27.5615 | 6.8170 | #98 6.7866
+[Epoch 100/400] LearningRate = 0.000297 EpochTime = 723.284 (s) Losses = ['27.6236', '20.2136', '12.2008', '6.6875', '27.6236']
+#100 27.6695 20.2508 12.2577 27.6695 | 6.8309 | #98 6.7866
+[Epoch 101/400] LearningRate = 0.000293 EpochTime = 723.286 (s) Losses = ['27.3920', '20.1107', '12.1406', '6.6459', '27.3920']
+#101 27.4497 20.0976 12.1609 27.4497 | 6.7753 | #98 6.7866
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 102/400] LearningRate = 0.000288 EpochTime = 724.781 (s) Losses = ['27.4095', '20.1042', '12.1317', '6.6452', '27.4095']
+#102 27.5768 20.1315 12.2129 27.5768 | 6.8234 | #101 6.7753
+[Epoch 103/400] LearningRate = 0.000284 EpochTime = 724.281 (s) Losses = ['27.3801', '20.0802', '12.1186', '6.6312', '27.3801']
+#103 27.4984 20.1408 12.1731 27.4984 | 6.7534 | #101 6.7753
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 104/400] LearningRate = 0.000280 EpochTime = 723.740 (s) Losses = ['27.6702', '20.2084', '12.2022', '6.6876', '27.6702']
+#104 27.8459 20.2922 12.2831 27.8459 | 6.8180 | #103 6.7534
+[Epoch 105/400] LearningRate = 0.000275 EpochTime = 722.759 (s) Losses = ['27.5079', '20.1610', '12.1645', '6.6597', '27.5079']
+#105 27.5120 20.2077 12.1989 27.5120 | 6.7978 | #103 6.7534
+[Epoch 106/400] LearningRate = 0.000271 EpochTime = 724.265 (s) Losses = ['27.4110', '20.1078', '12.1367', '6.6420', '27.4110']
+#106 27.5463 20.2656 12.2468 27.5463 | 6.8110 | #103 6.7534
+[Epoch 107/400] LearningRate = 0.000267 EpochTime = 723.416 (s) Losses = ['27.3640', '20.0921', '12.1203', '6.6330', '27.3640']
+#107 27.2753 19.9880 12.0682 27.2753 | 6.7194 | #103 6.7534
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 108/400] LearningRate = 0.000263 EpochTime = 723.936 (s) Losses = ['27.3248', '20.0388', '12.0827', '6.5998', '27.3248']
+#108 27.3784 20.1232 12.1792 27.3784 | 6.7660 | #107 6.7194
+[Epoch 109/400] LearningRate = 0.000259 EpochTime = 718.808 (s) Losses = ['27.3488', '20.0577', '12.0855', '6.6039', '27.3488']
+#109 27.3887 20.1067 12.1462 27.3887 | 6.7351 | #107 6.7194
+[Epoch 110/400] LearningRate = 0.000255 EpochTime = 720.824 (s) Losses = ['27.4319', '20.0718', '12.0982', '6.6113', '27.4319']
+#110 27.5889 20.1922 12.1963 27.5889 | 6.7917 | #107 6.7194
+[Epoch 111/400] LearningRate = 0.000251 EpochTime = 724.405 (s) Losses = ['27.3735', '20.0514', '12.0855', '6.6027', '27.3735']
+#111 27.4621 20.0730 12.1471 27.4621 | 6.7579 | #107 6.7194
+[Epoch 112/400] LearningRate = 0.000247 EpochTime = 724.237 (s) Losses = ['27.3627', '20.0575', '12.0815', '6.5967', '27.3627']
+#112 27.7023 20.2164 12.2410 27.7023 | 6.7842 | #107 6.7194
+[Epoch 113/400] LearningRate = 0.000244 EpochTime = 724.000 (s) Losses = ['27.4256', '20.0861', '12.0967', '6.6022', '27.4256']
+#113 27.3784 20.0640 12.1118 27.3784 | 6.7177 | #107 6.7194
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 114/400] LearningRate = 0.000240 EpochTime = 722.027 (s) Losses = ['27.3440', '20.0499', '12.0789', '6.5914', '27.3440']
+#114 27.4324 20.1067 12.1378 27.4324 | 6.7457 | #113 6.7177
+[Epoch 115/400] LearningRate = 0.000236 EpochTime = 721.912 (s) Losses = ['27.3555', '20.0449', '12.0761', '6.5937', '27.3555']
+#115 27.3879 20.0847 12.1203 27.3879 | 6.7093 | #113 6.7177
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 116/400] LearningRate = 0.000233 EpochTime = 721.289 (s) Losses = ['27.3532', '20.0427', '12.0791', '6.5893', '27.3532']
+#116 27.7439 20.1488 12.1751 27.7439 | 6.7451 | #115 6.7093
+[Epoch 117/400] LearningRate = 0.000229 EpochTime = 723.638 (s) Losses = ['27.3202', '20.0196', '12.0595', '6.5780', '27.3202']
+#117 27.5554 20.0784 12.1372 27.5554 | 6.7507 | #115 6.7093
+[Epoch 118/400] LearningRate = 0.000226 EpochTime = 723.591 (s) Losses = ['27.2629', '20.0037', '12.0404', '6.5622', '27.2629']
+#118 27.4313 20.1292 12.1405 27.4313 | 6.7223 | #115 6.7093
+[Epoch 119/400] LearningRate = 0.000222 EpochTime = 728.074 (s) Losses = ['27.2959', '20.0289', '12.0603', '6.5765', '27.2959']
+#119 27.5442 20.0556 12.1388 27.5442 | 6.7506 | #115 6.7093
+[Epoch 120/400] LearningRate = 0.000219 EpochTime = 730.408 (s) Losses = ['27.2497', '19.9656', '12.0145', '6.5474', '27.2497']
+#120 27.2526 20.0538 12.0928 27.2526 | 6.6888 | #115 6.7093
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 121/400] LearningRate = 0.000215 EpochTime = 725.155 (s) Losses = ['27.4449', '20.0372', '12.0677', '6.5874', '27.4449']
+#121 27.7886 20.2971 12.2485 27.7886 | 6.7754 | #120 6.6888
+[Epoch 122/400] LearningRate = 0.000212 EpochTime = 725.994 (s) Losses = ['27.3326', '20.0224', '12.0417', '6.5628', '27.3326']
+#122 27.2924 20.0618 12.1342 27.2924 | 6.7156 | #120 6.6888
+[Epoch 123/400] LearningRate = 0.000209 EpochTime = 726.748 (s) Losses = ['27.3346', '20.0298', '12.0504', '6.5684', '27.3346']
+#123 28.0609 20.2467 12.2342 28.0609 | 6.8041 | #120 6.6888
+[Epoch 124/400] LearningRate = 0.000206 EpochTime = 721.571 (s) Losses = ['27.7264', '20.1496', '12.1418', '6.6583', '27.7264']
+#124 27.3794 20.0657 12.1034 27.3794 | 6.6768 | #120 6.6888
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 125/400] LearningRate = 0.000203 EpochTime = 722.192 (s) Losses = ['27.2812', '20.0152', '12.0339', '6.5509', '27.2812']
+#125 27.2173 19.9851 12.0417 27.2173 | 6.6587 | #124 6.6768
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 126/400] LearningRate = 0.000200 EpochTime = 727.476 (s) Losses = ['27.1973', '19.9713', '12.0005', '6.5290', '27.1973']
+#126 27.2358 20.0396 12.0688 27.2358 | 6.7094 | #125 6.6587
+[Epoch 127/400] LearningRate = 0.000196 EpochTime = 725.733 (s) Losses = ['27.1811', '19.9438', '11.9928', '6.5283', '27.1811']
+#127 27.2531 19.9922 12.0639 27.2531 | 6.6871 | #125 6.6587
+[Epoch 128/400] LearningRate = 0.000193 EpochTime = 725.725 (s) Losses = ['27.2001', '19.9367', '11.9762', '6.5135', '27.2001']
+#128 27.4749 20.0473 12.0920 27.4749 | 6.7224 | #125 6.6587
+[Epoch 129/400] LearningRate = 0.000191 EpochTime = 723.095 (s) Losses = ['27.3197', '19.9808', '12.0109', '6.5391', '27.3197']
+#129 27.2547 19.9443 12.0573 27.2547 | 6.6775 | #125 6.6587
+[Epoch 130/400] LearningRate = 0.000188 EpochTime = 725.401 (s) Losses = ['27.2445', '19.9537', '11.9973', '6.5307', '27.2445']
+#130 27.2348 19.9794 12.0657 27.2348 | 6.6841 | #125 6.6587
+[Epoch 131/400] LearningRate = 0.000185 EpochTime = 725.871 (s) Losses = ['27.2282', '19.9237', '11.9637', '6.5032', '27.2282']
+#131 27.6247 20.0859 12.0989 27.6247 | 6.6951 | #125 6.6587
+[Epoch 132/400] LearningRate = 0.000182 EpochTime = 720.015 (s) Losses = ['27.2900', '19.9990', '12.0304', '6.5486', '27.2900']
+#132 27.4582 20.1365 12.1552 27.4582 | 6.7281 | #125 6.6587
+[Epoch 133/400] LearningRate = 0.000179 EpochTime = 723.749 (s) Losses = ['27.1882', '19.9549', '11.9937', '6.5194', '27.1882']
+#133 27.2088 20.0029 12.0403 27.2088 | 6.6278 | #125 6.6587
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 134/400] LearningRate = 0.000176 EpochTime = 724.761 (s) Losses = ['27.1457', '19.9184', '11.9768', '6.5085', '27.1457']
+#134 27.2229 19.9311 12.0457 27.2229 | 6.6833 | #133 6.6278
+[Epoch 135/400] LearningRate = 0.000174 EpochTime = 724.820 (s) Losses = ['27.2368', '19.9359', '11.9851', '6.5212', '27.2368']
+#135 27.2007 19.9906 12.0524 27.2007 | 6.6776 | #133 6.6278
+[Epoch 136/400] LearningRate = 0.000171 EpochTime = 723.833 (s) Losses = ['27.1717', '19.9133', '11.9499', '6.4888', '27.1717']
+#136 27.3113 19.9274 12.0301 27.3113 | 6.6669 | #133 6.6278
+[Epoch 137/400] LearningRate = 0.000169 EpochTime = 725.169 (s) Losses = ['27.1761', '19.8893', '11.9360', '6.4797', '27.1761']
+#137 27.2735 19.9584 12.0512 27.2735 | 6.6637 | #133 6.6278
+[Epoch 138/400] LearningRate = 0.000166 EpochTime = 721.737 (s) Losses = ['27.0980', '19.8827', '11.9386', '6.4831', '27.0980']
+#138 27.2369 19.9596 12.0535 27.2369 | 6.6679 | #133 6.6278
+[Epoch 139/400] LearningRate = 0.000163 EpochTime = 725.325 (s) Losses = ['27.1275', '19.8796', '11.9349', '6.4792', '27.1275']
+#139 27.1200 19.9112 11.9965 27.1200 | 6.6277 | #133 6.6278
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 140/400] LearningRate = 0.000161 EpochTime = 722.874 (s) Losses = ['27.0595', '19.8540', '11.9174', '6.4653', '27.0595']
+#140 27.0368 19.8797 11.9883 27.0368 | 6.6135 | #139 6.6277
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 141/400] LearningRate = 0.000158 EpochTime = 722.700 (s) Losses = ['27.0507', '19.8461', '11.9154', '6.4659', '27.0507']
+#141 27.2473 19.9406 12.0122 27.2473 | 6.6450 | #140 6.6135
+[Epoch 142/400] LearningRate = 0.000156 EpochTime = 720.708 (s) Losses = ['27.1645', '19.8948', '11.9439', '6.4879', '27.1645']
+#142 27.1893 19.9091 11.9759 27.1893 | 6.6124 | #140 6.6135
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 143/400] LearningRate = 0.000154 EpochTime = 723.845 (s) Losses = ['27.0869', '19.8636', '11.9190', '6.4702', '27.0869']
+#143 27.3446 19.9698 12.0257 27.3446 | 6.6593 | #142 6.6124
+[Epoch 144/400] LearningRate = 0.000151 EpochTime = 725.033 (s) Losses = ['27.2948', '19.9260', '11.9641', '6.4975', '27.2948']
+#144 28.2025 20.2771 12.2812 28.2025 | 6.8411 | #142 6.6124
+[Epoch 145/400] LearningRate = 0.000149 EpochTime = 723.462 (s) Losses = ['27.6486', '20.0579', '12.0341', '6.5318', '27.6486']
+#145 27.3278 19.9407 12.0048 27.3278 | 6.6203 | #142 6.6124
+[Epoch 146/400] LearningRate = 0.000147 EpochTime = 725.150 (s) Losses = ['27.1014', '19.8519', '11.9025', '6.4523', '27.1014']
+#146 27.1558 19.9150 11.9681 27.1558 | 6.5798 | #142 6.6124
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 147/400] LearningRate = 0.000145 EpochTime = 727.451 (s) Losses = ['27.1137', '19.8620', '11.9120', '6.4586', '27.1137']
+#147 27.0994 19.8767 11.9849 27.0994 | 6.5999 | #146 6.5798
+[Epoch 148/400] LearningRate = 0.000142 EpochTime = 727.297 (s) Losses = ['27.0244', '19.8484', '11.9105', '6.4533', '27.0244']
+#148 27.0937 19.8555 11.9580 27.0937 | 6.5779 | #146 6.5798
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 149/400] LearningRate = 0.000140 EpochTime = 720.505 (s) Losses = ['27.0216', '19.8286', '11.8972', '6.4431', '27.0216']
+#149 27.0807 19.8442 11.9454 27.0807 | 6.5767 | #148 6.5779
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 150/400] LearningRate = 0.000138 EpochTime = 721.025 (s) Losses = ['27.0694', '19.8331', '11.8875', '6.4377', '27.0694']
+#150 27.1087 19.8455 11.9660 27.1087 | 6.6061 | #149 6.5767
+[Epoch 151/400] LearningRate = 0.000136 EpochTime = 724.048 (s) Losses = ['27.0681', '19.8366', '11.8985', '6.4425', '27.0681']
+#151 27.0184 19.8342 11.9524 27.0184 | 6.5928 | #149 6.5767
+[Epoch 152/400] LearningRate = 0.000134 EpochTime = 723.792 (s) Losses = ['27.0871', '19.8318', '11.9024', '6.4511', '27.0871']
+#152 27.1437 19.8574 11.9473 27.1437 | 6.6013 | #149 6.5767
+[Epoch 153/400] LearningRate = 0.000132 EpochTime = 726.690 (s) Losses = ['27.0444', '19.8372', '11.8981', '6.4464', '27.0444']
+#153 27.0813 19.8232 11.9104 27.0813 | 6.5536 | #149 6.5767
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 154/400] LearningRate = 0.000130 EpochTime = 725.565 (s) Losses = ['26.9982', '19.8088', '11.8802', '6.4364', '26.9982']
+#154 26.9952 19.7694 11.8988 26.9952 | 6.5728 | #153 6.5536
+[Epoch 155/400] LearningRate = 0.000128 EpochTime = 724.461 (s) Losses = ['27.0382', '19.8075', '11.8704', '6.4284', '27.0382']
+#155 27.3387 20.0077 12.0576 27.3387 | 6.6614 | #153 6.5536
+[Epoch 156/400] LearningRate = 0.000126 EpochTime = 729.070 (s) Losses = ['27.2746', '19.8919', '11.9212', '6.4638', '27.2746']
+#156 27.0676 19.8499 11.9459 27.0676 | 6.5963 | #153 6.5536
+[Epoch 157/400] LearningRate = 0.000124 EpochTime = 728.354 (s) Losses = ['27.1799', '19.8533', '11.8870', '6.4378', '27.1799']
+#157 27.0006 19.8038 11.8972 27.0006 | 6.5494 | #153 6.5536
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 158/400] LearningRate = 0.000122 EpochTime = 726.467 (s) Losses = ['27.0252', '19.8243', '11.8770', '6.4260', '27.0252']
+#158 27.0191 19.8487 11.9459 27.0191 | 6.6083 | #157 6.5494
+[Epoch 159/400] LearningRate = 0.000120 EpochTime = 728.811 (s) Losses = ['26.9360', '19.7685', '11.8442', '6.4057', '26.9360']
+#159 27.0351 19.8465 11.9210 27.0351 | 6.5644 | #157 6.5494
+[Epoch 160/400] LearningRate = 0.000118 EpochTime = 727.837 (s) Losses = ['27.0057', '19.7829', '11.8524', '6.4153', '27.0057']
+#160 26.9672 19.7945 11.9159 26.9672 | 6.5751 | #157 6.5494
+[Epoch 161/400] LearningRate = 0.000117 EpochTime = 727.545 (s) Losses = ['26.9415', '19.7693', '11.8498', '6.4043', '26.9415']
+#161 27.0699 19.8460 11.9300 27.0699 | 6.5735 | #157 6.5494
+[Epoch 162/400] LearningRate = 0.000115 EpochTime = 722.402 (s) Losses = ['26.9938', '19.7858', '11.8558', '6.4098', '26.9938']
+#162 26.9605 19.7771 11.9015 26.9605 | 6.5471 | #157 6.5494
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 163/400] LearningRate = 0.000113 EpochTime = 724.810 (s) Losses = ['27.0003', '19.7786', '11.8584', '6.4104', '27.0003']
+#163 26.9666 19.7936 11.9102 26.9666 | 6.5770 | #162 6.5471
+[Epoch 164/400] LearningRate = 0.000111 EpochTime = 723.663 (s) Losses = ['27.0085', '19.7839', '11.8478', '6.4047', '27.0085']
+#164 26.9897 19.7890 11.8881 26.9897 | 6.5335 | #162 6.5471
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 165/400] LearningRate = 0.000110 EpochTime = 726.936 (s) Losses = ['26.9346', '19.7404', '11.8095', '6.3767', '26.9346']
+#165 27.0721 19.8460 11.9176 27.0721 | 6.5659 | #164 6.5335
+[Epoch 166/400] LearningRate = 0.000108 EpochTime = 721.321 (s) Losses = ['27.2781', '19.8560', '11.8849', '6.4371', '27.2781']
+#166 27.2868 19.8777 11.9574 27.2868 | 6.6005 | #164 6.5335
+[Epoch 167/400] LearningRate = 0.000106 EpochTime = 723.564 (s) Losses = ['27.0029', '19.7706', '11.8369', '6.4005', '27.0029']
+#167 26.9419 19.7856 11.8870 26.9419 | 6.5603 | #164 6.5335
+[Epoch 168/400] LearningRate = 0.000105 EpochTime = 725.594 (s) Losses = ['26.9126', '19.7372', '11.8168', '6.3859', '26.9126']
+#168 26.9631 19.8278 11.9275 26.9631 | 6.5717 | #164 6.5335
+[Epoch 169/400] LearningRate = 0.000103 EpochTime = 725.894 (s) Losses = ['26.9905', '19.7878', '11.8535', '6.4063', '26.9905']
+#169 26.8935 19.7958 11.9117 26.8935 | 6.5450 | #164 6.5335
+[Epoch 170/400] LearningRate = 0.000102 EpochTime = 724.821 (s) Losses = ['26.9232', '19.7319', '11.8156', '6.3828', '26.9232']
+#170 26.9722 19.7707 11.8760 26.9722 | 6.5463 | #164 6.5335
+[Epoch 171/400] LearningRate = 0.000100 EpochTime = 726.992 (s) Losses = ['26.9407', '19.7439', '11.8056', '6.3750', '26.9407']
+#171 27.5610 19.9371 12.0635 27.5610 | 6.7074 | #164 6.5335
+[Epoch 172/400] LearningRate = 0.000098 EpochTime = 723.655 (s) Losses = ['27.0179', '19.7574', '11.8301', '6.3968', '27.0179']
+#172 26.9797 19.7698 11.8710 26.9797 | 6.5244 | #164 6.5335
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 173/400] LearningRate = 0.000097 EpochTime = 721.734 (s) Losses = ['26.9589', '19.7438', '11.8300', '6.3872', '26.9589']
+#173 27.0343 19.8033 11.8901 27.0343 | 6.5279 | #172 6.5244
+[Epoch 174/400] LearningRate = 0.000095 EpochTime = 723.346 (s) Losses = ['26.9223', '19.7375', '11.8139', '6.3790', '26.9223']
+#174 26.9335 19.7632 11.8946 26.9335 | 6.5573 | #172 6.5244
+[Epoch 175/400] LearningRate = 0.000094 EpochTime = 722.615 (s) Losses = ['26.8993', '19.7316', '11.8085', '6.3775', '26.8993']
+#175 27.0229 19.7732 11.8729 27.0229 | 6.5402 | #172 6.5244
+[Epoch 176/400] LearningRate = 0.000093 EpochTime = 727.532 (s) Losses = ['26.9228', '19.7405', '11.8128', '6.3786', '26.9228']
+#176 27.1126 19.8544 11.9215 27.1126 | 6.5636 | #172 6.5244
+[Epoch 177/400] LearningRate = 0.000091 EpochTime = 728.495 (s) Losses = ['27.0284', '19.7649', '11.8179', '6.3808', '27.0284']
+#177 27.1344 19.8348 11.9095 27.1344 | 6.5587 | #172 6.5244
+[Epoch 178/400] LearningRate = 0.000090 EpochTime = 728.696 (s) Losses = ['27.0265', '19.7557', '11.8173', '6.3838', '27.0265']
+#178 26.9805 19.7834 11.9004 26.9805 | 6.5660 | #172 6.5244
+[Epoch 179/400] LearningRate = 0.000088 EpochTime = 732.684 (s) Losses = ['26.8679', '19.7037', '11.7761', '6.3498', '26.8679']
+#179 26.8312 19.7443 11.8721 26.8312 | 6.5267 | #172 6.5244
+[Epoch 180/400] LearningRate = 0.000087 EpochTime = 727.891 (s) Losses = ['26.9232', '19.7238', '11.8055', '6.3717', '26.9232']
+#180 26.8576 19.7168 11.8416 26.8576 | 6.5096 | #172 6.5244
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 181/400] LearningRate = 0.000086 EpochTime = 732.830 (s) Losses = ['26.8328', '19.6898', '11.7828', '6.3603', '26.8328']
+#181 26.9032 19.7519 11.8800 26.9032 | 6.5577 | #180 6.5096
+[Epoch 182/400] LearningRate = 0.000084 EpochTime = 727.388 (s) Losses = ['26.8440', '19.6864', '11.7777', '6.3530', '26.8440']
+#182 26.9052 19.7439 11.8840 26.9052 | 6.5539 | #180 6.5096
+[Epoch 183/400] LearningRate = 0.000083 EpochTime = 726.207 (s) Losses = ['26.8471', '19.6992', '11.7817', '6.3543', '26.8471']
+#183 26.8148 19.6993 11.8557 26.8148 | 6.5347 | #180 6.5096
+[Epoch 184/400] LearningRate = 0.000082 EpochTime = 725.687 (s) Losses = ['26.8852', '19.7080', '11.7967', '6.3653', '26.8852']
+#184 26.8800 19.6793 11.8358 26.8800 | 6.5320 | #180 6.5096
+[Epoch 185/400] LearningRate = 0.000081 EpochTime = 725.563 (s) Losses = ['26.8641', '19.7004', '11.7864', '6.3555', '26.8641']
+#185 26.8533 19.6984 11.8483 26.8533 | 6.5415 | #180 6.5096
+[Epoch 186/400] LearningRate = 0.000079 EpochTime = 724.355 (s) Losses = ['26.8399', '19.6811', '11.7709', '6.3464', '26.8399']
+#186 26.8575 19.7397 11.8614 26.8575 | 6.5151 | #180 6.5096
+[Epoch 187/400] LearningRate = 0.000078 EpochTime = 728.756 (s) Losses = ['26.8145', '19.6782', '11.7629', '6.3377', '26.8145']
+#187 26.8195 19.7143 11.8425 26.8195 | 6.5161 | #180 6.5096
+[Epoch 188/400] LearningRate = 0.000077 EpochTime = 727.187 (s) Losses = ['26.9073', '19.7063', '11.7791', '6.3494', '26.9073']
+#188 26.9211 19.7378 11.8772 26.9211 | 6.5358 | #180 6.5096
+[Epoch 189/400] LearningRate = 0.000076 EpochTime = 720.672 (s) Losses = ['26.8633', '19.6950', '11.7781', '6.3505', '26.8633']
+#189 26.7564 19.6927 11.8335 26.7564 | 6.5107 | #180 6.5096
+[Epoch 190/400] LearningRate = 0.000075 EpochTime = 725.786 (s) Losses = ['26.8185', '19.6739', '11.7605', '6.3353', '26.8185']
+#190 26.8695 19.7292 11.8586 26.8695 | 6.5249 | #180 6.5096
+[Epoch 191/400] LearningRate = 0.000074 EpochTime = 730.304 (s) Losses = ['26.8130', '19.6597', '11.7537', '6.3359', '26.8130']
+#191 26.7961 19.6678 11.8362 26.7961 | 6.5069 | #180 6.5096
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 192/400] LearningRate = 0.000072 EpochTime = 728.430 (s) Losses = ['26.8431', '19.6707', '11.7613', '6.3410', '26.8431']
+#192 26.8668 19.7120 11.8663 26.8668 | 6.5484 | #191 6.5069
+[Epoch 193/400] LearningRate = 0.000071 EpochTime = 729.199 (s) Losses = ['26.8322', '19.6740', '11.7666', '6.3415', '26.8322']
+#193 26.9275 19.7255 11.8641 26.9275 | 6.5244 | #191 6.5069
+[Epoch 194/400] LearningRate = 0.000070 EpochTime = 731.132 (s) Losses = ['26.8634', '19.6982', '11.7933', '6.3537', '26.8634']
+#194 26.7961 19.6620 11.8334 26.7961 | 6.5001 | #191 6.5069
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 195/400] LearningRate = 0.000069 EpochTime = 729.732 (s) Losses = ['26.8653', '19.6724', '11.7561', '6.3365', '26.8653']
+#195 27.0159 19.7611 11.8737 27.0159 | 6.5398 | #194 6.5001
+[Epoch 196/400] LearningRate = 0.000068 EpochTime = 729.544 (s) Losses = ['26.8644', '19.6717', '11.7488', '6.3272', '26.8644']
+#196 26.8272 19.7213 11.8353 26.8272 | 6.5058 | #194 6.5001
+[Epoch 197/400] LearningRate = 0.000067 EpochTime = 728.472 (s) Losses = ['26.8367', '19.6764', '11.7600', '6.3357', '26.8367']
+#197 26.8311 19.6821 11.8253 26.8311 | 6.4980 | #194 6.5001
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 198/400] LearningRate = 0.000066 EpochTime = 726.962 (s) Losses = ['26.7899', '19.6520', '11.7446', '6.3221', '26.7899']
+#198 26.8487 19.6664 11.8309 26.8487 | 6.5089 | #197 6.4980
+[Epoch 199/400] LearningRate = 0.000065 EpochTime = 727.994 (s) Losses = ['26.7892', '19.6330', '11.7270', '6.3139', '26.7892']
+#199 26.7798 19.6818 11.8496 26.7798 | 6.5188 | #197 6.4980
+[Epoch 200/400] LearningRate = 0.000064 EpochTime = 724.571 (s) Losses = ['26.7878', '19.6485', '11.7424', '6.3230', '26.7878']
+#200 26.7555 19.6471 11.8070 26.7555 | 6.4803 | #197 6.4980
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 201/400] LearningRate = 0.000063 EpochTime = 725.296 (s) Losses = ['26.8241', '19.6423', '11.7373', '6.3187', '26.8241']
+#201 26.8937 19.7113 11.8617 26.8937 | 6.5273 | #200 6.4803
+[Epoch 202/400] LearningRate = 0.000062 EpochTime = 727.182 (s) Losses = ['26.8124', '19.6488', '11.7456', '6.3300', '26.8124']
+#202 26.8213 19.6789 11.8222 26.8213 | 6.4936 | #200 6.4803
+[Epoch 203/400] LearningRate = 0.000061 EpochTime = 733.039 (s) Losses = ['26.8136', '19.6442', '11.7321', '6.3164', '26.8136']
+#203 26.9524 19.7322 11.8359 26.9524 | 6.5274 | #200 6.4803
+[Epoch 204/400] LearningRate = 0.000060 EpochTime = 726.750 (s) Losses = ['26.8000', '19.6366', '11.7262', '6.3146', '26.8000']
+#204 26.8451 19.7045 11.8235 26.8451 | 6.5036 | #200 6.4803
+[Epoch 205/400] LearningRate = 0.000059 EpochTime = 724.520 (s) Losses = ['26.7842', '19.6230', '11.7200', '6.3081', '26.7842']
+#205 26.8198 19.6963 11.8168 26.8198 | 6.4888 | #200 6.4803
+[Epoch 206/400] LearningRate = 0.000058 EpochTime = 727.879 (s) Losses = ['26.7764', '19.6198', '11.7093', '6.2981', '26.7764']
+#206 26.8063 19.6949 11.8208 26.8063 | 6.4969 | #200 6.4803
+[Epoch 207/400] LearningRate = 0.000058 EpochTime = 731.539 (s) Losses = ['26.7951', '19.6375', '11.7207', '6.3061', '26.7951']
+#207 26.9930 19.6933 11.8091 26.9930 | 6.4816 | #200 6.4803
+[Epoch 208/400] LearningRate = 0.000057 EpochTime = 729.263 (s) Losses = ['26.7944', '19.6343', '11.7240', '6.3122', '26.7944']
+#208 26.8157 19.6892 11.7909 26.8157 | 6.4630 | #200 6.4803
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 209/400] LearningRate = 0.000056 EpochTime = 725.844 (s) Losses = ['26.7412', '19.6270', '11.7150', '6.3007', '26.7412']
+#209 26.7852 19.6612 11.8011 26.7852 | 6.4822 | #208 6.4630
+[Epoch 210/400] LearningRate = 0.000055 EpochTime = 724.297 (s) Losses = ['26.7464', '19.6182', '11.7127', '6.2998', '26.7464']
+#210 26.8580 19.6815 11.8091 26.8580 | 6.4717 | #208 6.4630
+[Epoch 211/400] LearningRate = 0.000054 EpochTime = 728.927 (s) Losses = ['26.7608', '19.6361', '11.7243', '6.3063', '26.7608']
+#211 26.9045 19.7102 11.8281 26.9045 | 6.5009 | #208 6.4630
+[Epoch 212/400] LearningRate = 0.000053 EpochTime = 724.829 (s) Losses = ['26.7833', '19.6385', '11.7266', '6.3088', '26.7833']
+#212 26.7950 19.7233 11.8351 26.7950 | 6.5095 | #208 6.4630
+[Epoch 213/400] LearningRate = 0.000052 EpochTime = 729.199 (s) Losses = ['26.8066', '19.6345', '11.7245', '6.3083', '26.8066']
+#213 26.8233 19.6707 11.8231 26.8233 | 6.5028 | #208 6.4630
+[Epoch 214/400] LearningRate = 0.000052 EpochTime = 724.850 (s) Losses = ['26.7350', '19.6068', '11.7076', '6.2983', '26.7350']
+#214 26.7744 19.6848 11.8166 26.7744 | 6.4925 | #208 6.4630
+[Epoch 215/400] LearningRate = 0.000051 EpochTime = 725.147 (s) Losses = ['26.7040', '19.5846', '11.6872', '6.2785', '26.7040']
+#215 26.8248 19.6680 11.7894 26.8248 | 6.4703 | #208 6.4630
+[Epoch 216/400] LearningRate = 0.000050 EpochTime = 725.651 (s) Losses = ['26.7721', '19.6021', '11.7032', '6.2965', '26.7721']
+#216 26.9206 19.7139 11.8301 26.9206 | 6.5103 | #208 6.4630
+[Epoch 217/400] LearningRate = 0.000049 EpochTime = 727.986 (s) Losses = ['26.7148', '19.5980', '11.7010', '6.2882', '26.7148']
+#217 26.7284 19.6179 11.7879 26.7284 | 6.4884 | #208 6.4630
+[Epoch 218/400] LearningRate = 0.000049 EpochTime = 722.967 (s) Losses = ['26.7075', '19.6026', '11.6966', '6.2881', '26.7075']
+#218 26.8474 19.6877 11.8241 26.8474 | 6.5092 | #208 6.4630
+[Epoch 219/400] LearningRate = 0.000048 EpochTime = 731.955 (s) Losses = ['26.7713', '19.6057', '11.7045', '6.2982', '26.7713']
+#219 26.7802 19.6393 11.7920 26.7802 | 6.4805 | #208 6.4630
+[Epoch 220/400] LearningRate = 0.000047 EpochTime = 727.571 (s) Losses = ['26.7017', '19.5914', '11.6911', '6.2889', '26.7017']
+#220 26.8830 19.6676 11.8294 26.8830 | 6.5206 | #208 6.4630
+[Epoch 221/400] LearningRate = 0.000046 EpochTime = 730.817 (s) Losses = ['26.7398', '19.5974', '11.6970', '6.2869', '26.7398']
+#221 26.7773 19.6303 11.7872 26.7773 | 6.4683 | #208 6.4630
+[Epoch 222/400] LearningRate = 0.000046 EpochTime = 727.075 (s) Losses = ['26.6991', '19.5901', '11.6897', '6.2816', '26.6991']
+#222 26.8048 19.6716 11.8135 26.8048 | 6.5082 | #208 6.4630
+[Epoch 223/400] LearningRate = 0.000045 EpochTime = 728.691 (s) Losses = ['26.7005', '19.5842', '11.6926', '6.2884', '26.7005']
+#223 26.8753 19.6542 11.8070 26.8753 | 6.4979 | #208 6.4630
+[Epoch 224/400] LearningRate = 0.000044 EpochTime = 723.943 (s) Losses = ['26.7179', '19.5947', '11.6910', '6.2791', '26.7179']
+#224 26.7951 19.6840 11.8007 26.7951 | 6.4705 | #208 6.4630
+[Epoch 225/400] LearningRate = 0.000044 EpochTime = 731.080 (s) Losses = ['26.7063', '19.5932', '11.6881', '6.2795', '26.7063']
+#225 26.7663 19.6819 11.8142 26.7663 | 6.4999 | #208 6.4630
+[Epoch 226/400] LearningRate = 0.000043 EpochTime = 727.955 (s) Losses = ['26.7076', '19.5959', '11.7004', '6.2899', '26.7076']
+#226 26.7446 19.6381 11.8154 26.7446 | 6.5034 | #208 6.4630
+[Epoch 227/400] LearningRate = 0.000042 EpochTime = 730.892 (s) Losses = ['26.6605', '19.5697', '11.6773', '6.2723', '26.6605']
+#227 26.7309 19.6488 11.7996 26.7309 | 6.4867 | #208 6.4630
+[Epoch 228/400] LearningRate = 0.000042 EpochTime = 731.482 (s) Losses = ['26.7012', '19.5819', '11.6882', '6.2801', '26.7012']
+#228 26.7303 19.6347 11.7922 26.7303 | 6.4880 | #208 6.4630
+[Epoch 229/400] LearningRate = 0.000041 EpochTime = 727.819 (s) Losses = ['26.6988', '19.5728', '11.6804', '6.2792', '26.6988']
+#229 26.7199 19.6268 11.7918 26.7199 | 6.4738 | #208 6.4630
+[Epoch 230/400] LearningRate = 0.000040 EpochTime = 730.551 (s) Losses = ['26.7097', '19.5800', '11.6824', '6.2808', '26.7097']
+#230 27.3081 19.8192 11.9453 27.3081 | 6.6229 | #208 6.4630
+[Epoch 231/400] LearningRate = 0.000040 EpochTime = 728.056 (s) Losses = ['26.7212', '19.5776', '11.6846', '6.2791', '26.7212']
+#231 26.7518 19.6385 11.7877 26.7518 | 6.4726 | #208 6.4630
+[Epoch 232/400] LearningRate = 0.000039 EpochTime = 728.804 (s) Losses = ['26.6695', '19.5583', '11.6689', '6.2672', '26.6695']
+#232 26.7158 19.6197 11.7853 26.7158 | 6.4721 | #208 6.4630
+[Epoch 233/400] LearningRate = 0.000039 EpochTime = 724.336 (s) Losses = ['26.6717', '19.5455', '11.6522', '6.2561', '26.6717']
+#233 26.7251 19.6123 11.7779 26.7251 | 6.4601 | #208 6.4630
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 234/400] LearningRate = 0.000038 EpochTime = 723.887 (s) Losses = ['26.7089', '19.5786', '11.6801', '6.2710', '26.7089']
+#234 26.7175 19.6167 11.7603 26.7175 | 6.4583 | #233 6.4601
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 235/400] LearningRate = 0.000037 EpochTime = 729.803 (s) Losses = ['26.6439', '19.5468', '11.6601', '6.2611', '26.6439']
+#235 26.7820 19.6236 11.7831 26.7820 | 6.4765 | #234 6.4583
+[Epoch 236/400] LearningRate = 0.000037 EpochTime = 726.310 (s) Losses = ['26.6878', '19.5611', '11.6677', '6.2664', '26.6878']
+#236 26.7060 19.5916 11.7464 26.7060 | 6.4592 | #234 6.4583
+[Epoch 237/400] LearningRate = 0.000036 EpochTime = 726.695 (s) Losses = ['26.6721', '19.5603', '11.6720', '6.2690', '26.6721']
+#237 26.6881 19.6265 11.7756 26.6881 | 6.4658 | #234 6.4583
+[Epoch 238/400] LearningRate = 0.000036 EpochTime = 727.672 (s) Losses = ['26.6724', '19.5595', '11.6722', '6.2714', '26.6724']
+#238 26.6932 19.6007 11.7692 26.6932 | 6.4627 | #234 6.4583
+[Epoch 239/400] LearningRate = 0.000035 EpochTime = 727.373 (s) Losses = ['26.6731', '19.5609', '11.6667', '6.2628', '26.6731']
+#239 26.7034 19.6258 11.7647 26.7034 | 6.4720 | #234 6.4583
+[Epoch 240/400] LearningRate = 0.000035 EpochTime = 731.861 (s) Losses = ['26.6256', '19.5415', '11.6577', '6.2578', '26.6256']
+#240 26.6223 19.5902 11.7625 26.6223 | 6.4656 | #234 6.4583
+[Epoch 241/400] LearningRate = 0.000034 EpochTime = 728.893 (s) Losses = ['26.6415', '19.5317', '11.6456', '6.2486', '26.6415']
+#241 26.7449 19.6171 11.7850 26.7449 | 6.4820 | #234 6.4583
+[Epoch 242/400] LearningRate = 0.000034 EpochTime = 727.579 (s) Losses = ['26.6423', '19.5408', '11.6542', '6.2554', '26.6423']
+#242 26.6668 19.5987 11.7670 26.6668 | 6.4706 | #234 6.4583
+[Epoch 243/400] LearningRate = 0.000033 EpochTime = 730.053 (s) Losses = ['26.6849', '19.5533', '11.6602', '6.2623', '26.6849']
+#243 26.7045 19.5973 11.7610 26.7045 | 6.4616 | #234 6.4583
+[Epoch 244/400] LearningRate = 0.000033 EpochTime = 728.197 (s) Losses = ['26.8989', '19.6221', '11.7089', '6.3012', '26.8989']
+#244 26.7514 19.6343 11.7847 26.7514 | 6.4758 | #234 6.4583
+[Epoch 245/400] LearningRate = 0.000032 EpochTime = 730.364 (s) Losses = ['26.7221', '19.5862', '11.6865', '6.2751', '26.7221']
+#245 26.6707 19.6113 11.7628 26.6707 | 6.4579 | #234 6.4583
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 246/400] LearningRate = 0.000032 EpochTime = 725.484 (s) Losses = ['26.6727', '19.5529', '11.6608', '6.2557', '26.6727']
+#246 26.6948 19.6091 11.7557 26.6948 | 6.4652 | #245 6.4579
+[Epoch 247/400] LearningRate = 0.000031 EpochTime = 725.478 (s) Losses = ['26.6311', '19.5341', '11.6452', '6.2440', '26.6311']
+#247 26.6844 19.5942 11.7550 26.6844 | 6.4433 | #245 6.4579
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 248/400] LearningRate = 0.000031 EpochTime = 730.956 (s) Losses = ['26.6234', '19.5331', '11.6465', '6.2475', '26.6234']
+#248 26.6589 19.5751 11.7385 26.6589 | 6.4434 | #247 6.4433
+[Epoch 249/400] LearningRate = 0.000030 EpochTime = 728.112 (s) Losses = ['26.6173', '19.5375', '11.6515', '6.2549', '26.6173']
+#249 26.6668 19.5852 11.7416 26.6668 | 6.4466 | #247 6.4433
+[Epoch 250/400] LearningRate = 0.000030 EpochTime = 729.533 (s) Losses = ['26.6359', '19.5472', '11.6557', '6.2537', '26.6359']
+#250 26.8041 19.6246 11.7764 26.8041 | 6.4861 | #247 6.4433
+[Epoch 251/400] LearningRate = 0.000029 EpochTime = 726.703 (s) Losses = ['26.6662', '19.5561', '11.6609', '6.2595', '26.6662']
+#251 26.6913 19.6054 11.7612 26.6913 | 6.4748 | #247 6.4433
+[Epoch 252/400] LearningRate = 0.000029 EpochTime = 725.388 (s) Losses = ['26.6445', '19.5456', '11.6611', '6.2584', '26.6445']
+#252 26.6570 19.5831 11.7563 26.6570 | 6.4682 | #247 6.4433
+[Epoch 253/400] LearningRate = 0.000028 EpochTime = 723.859 (s) Losses = ['26.6852', '19.5424', '11.6492', '6.2500', '26.6852']
+#253 26.6648 19.6229 11.7794 26.6648 | 6.4671 | #247 6.4433
+[Epoch 254/400] LearningRate = 0.000028 EpochTime = 724.541 (s) Losses = ['26.6386', '19.5516', '11.6593', '6.2519', '26.6386']
+#254 26.7483 19.6045 11.7584 26.7483 | 6.4819 | #247 6.4433
+[Epoch 255/400] LearningRate = 0.000028 EpochTime = 725.174 (s) Losses = ['26.6463', '19.5393', '11.6495', '6.2465', '26.6463']
+#255 26.6628 19.5858 11.7463 26.6628 | 6.4392 | #247 6.4433
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 256/400] LearningRate = 0.000027 EpochTime = 726.467 (s) Losses = ['26.6548', '19.5597', '11.6590', '6.2531', '26.6548']
+#256 26.7396 19.6050 11.7711 26.7396 | 6.4675 | #255 6.4392
+[Epoch 257/400] LearningRate = 0.000027 EpochTime = 727.688 (s) Losses = ['26.6292', '19.5358', '11.6448', '6.2439', '26.6292']
+#257 26.6537 19.5984 11.7674 26.6537 | 6.4734 | #255 6.4392
+[Epoch 258/400] LearningRate = 0.000026 EpochTime = 727.364 (s) Losses = ['26.6298', '19.5362', '11.6450', '6.2480', '26.6298']
+#258 26.6659 19.5720 11.7398 26.6659 | 6.4457 | #255 6.4392
+[Epoch 259/400] LearningRate = 0.000026 EpochTime = 730.068 (s) Losses = ['26.6666', '19.5584', '11.6609', '6.2579', '26.6666']
+#259 26.7214 19.6080 11.7642 26.7214 | 6.4646 | #255 6.4392
+[Epoch 260/400] LearningRate = 0.000026 EpochTime = 722.220 (s) Losses = ['26.6479', '19.5544', '11.6618', '6.2562', '26.6479']
+#260 26.6994 19.5860 11.7510 26.6994 | 6.4515 | #255 6.4392
+[Epoch 261/400] LearningRate = 0.000025 EpochTime = 723.608 (s) Losses = ['26.6276', '19.5332', '11.6453', '6.2470', '26.6276']
+#261 26.6559 19.5791 11.7383 26.6559 | 6.4318 | #255 6.4392
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 262/400] LearningRate = 0.000025 EpochTime = 722.741 (s) Losses = ['26.6117', '19.5212', '11.6331', '6.2411', '26.6117']
+#262 26.7194 19.5965 11.7499 26.7194 | 6.4696 | #261 6.4318
+[Epoch 263/400] LearningRate = 0.000024 EpochTime = 724.862 (s) Losses = ['26.6089', '19.5220', '11.6393', '6.2438', '26.6089']
+#263 26.6888 19.5959 11.7513 26.6888 | 6.4557 | #261 6.4318
+[Epoch 264/400] LearningRate = 0.000024 EpochTime = 723.811 (s) Losses = ['26.6145', '19.5139', '11.6333', '6.2404', '26.6145']
+#264 26.6687 19.5796 11.7478 26.6687 | 6.4573 | #261 6.4318
+[Epoch 265/400] LearningRate = 0.000024 EpochTime = 725.753 (s) Losses = ['26.6175', '19.5209', '11.6317', '6.2357', '26.6175']
+#265 26.6590 19.5722 11.7532 26.6590 | 6.4524 | #261 6.4318
+[Epoch 266/400] LearningRate = 0.000023 EpochTime = 729.224 (s) Losses = ['26.6112', '19.5180', '11.6291', '6.2357', '26.6112']
+#266 26.6539 19.5985 11.7643 26.6539 | 6.4567 | #261 6.4318
+[Epoch 267/400] LearningRate = 0.000023 EpochTime = 725.936 (s) Losses = ['26.6411', '19.5421', '11.6507', '6.2517', '26.6411']
+#267 26.6728 19.5777 11.7494 26.6728 | 6.4533 | #261 6.4318
+[Epoch 268/400] LearningRate = 0.000023 EpochTime = 726.924 (s) Losses = ['26.6281', '19.5377', '11.6461', '6.2440', '26.6281']
+#268 26.6234 19.5695 11.7231 26.6234 | 6.4254 | #261 6.4318
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 269/400] LearningRate = 0.000022 EpochTime = 731.270 (s) Losses = ['26.5989', '19.5121', '11.6275', '6.2340', '26.5989']
+#269 26.5759 19.5644 11.7505 26.5759 | 6.4442 | #268 6.4254
+[Epoch 270/400] LearningRate = 0.000022 EpochTime = 729.257 (s) Losses = ['26.6096', '19.5140', '11.6284', '6.2312', '26.6096']
+#270 26.6235 19.5673 11.7402 26.6235 | 6.4402 | #268 6.4254
+[Epoch 271/400] LearningRate = 0.000022 EpochTime = 726.548 (s) Losses = ['26.5877', '19.5053', '11.6234', '6.2294', '26.5877']
+#271 26.6202 19.5637 11.7329 26.6202 | 6.4316 | #268 6.4254
+[Epoch 272/400] LearningRate = 0.000021 EpochTime = 728.080 (s) Losses = ['26.6090', '19.5259', '11.6362', '6.2382', '26.6090']
+#272 26.6228 19.5457 11.7186 26.6228 | 6.4368 | #268 6.4254
+[Epoch 273/400] LearningRate = 0.000021 EpochTime = 722.984 (s) Losses = ['26.5886', '19.5083', '11.6252', '6.2302', '26.5886']
+#273 26.6370 19.5593 11.7385 26.6370 | 6.4442 | #268 6.4254
+[Epoch 274/400] LearningRate = 0.000021 EpochTime = 725.442 (s) Losses = ['26.6097', '19.5137', '11.6284', '6.2339', '26.6097']
+#274 26.6078 19.5562 11.7412 26.6078 | 6.4465 | #268 6.4254
+[Epoch 275/400] LearningRate = 0.000020 EpochTime = 725.574 (s) Losses = ['26.6308', '19.5312', '11.6429', '6.2439', '26.6308']
+#275 26.6359 19.5629 11.7322 26.6359 | 6.4399 | #268 6.4254
+[Epoch 276/400] LearningRate = 0.000020 EpochTime = 724.596 (s) Losses = ['26.6021', '19.5055', '11.6229', '6.2311', '26.6021']
+#276 26.6155 19.5478 11.7278 26.6155 | 6.4393 | #268 6.4254
+[Epoch 277/400] LearningRate = 0.000020 EpochTime = 719.915 (s) Losses = ['26.5923', '19.5015', '11.6206', '6.2282', '26.5923']
+#277 26.6283 19.5380 11.7286 26.6283 | 6.4355 | #268 6.4254
+[Epoch 278/400] LearningRate = 0.000019 EpochTime = 721.531 (s) Losses = ['26.6100', '19.5242', '11.6364', '6.2327', '26.6100']
+#278 26.6258 19.5533 11.7206 26.6258 | 6.4301 | #268 6.4254
+[Epoch 279/400] LearningRate = 0.000019 EpochTime = 720.314 (s) Losses = ['26.5765', '19.4859', '11.6078', '6.2202', '26.5765']
+#279 26.5770 19.5527 11.7170 26.5770 | 6.4195 | #268 6.4254
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 280/400] LearningRate = 0.000019 EpochTime = 726.734 (s) Losses = ['26.6101', '19.5266', '11.6400', '6.2395', '26.6101']
+#280 26.6184 19.5472 11.7238 26.6184 | 6.4403 | #279 6.4195
+[Epoch 281/400] LearningRate = 0.000018 EpochTime = 728.482 (s) Losses = ['26.5995', '19.5138', '11.6291', '6.2345', '26.5995']
+#281 26.6174 19.5476 11.7258 26.6174 | 6.4432 | #279 6.4195
+[Epoch 282/400] LearningRate = 0.000018 EpochTime = 724.579 (s) Losses = ['26.5659', '19.4893', '11.6087', '6.2207', '26.5659']
+#282 26.5738 19.5409 11.7263 26.5738 | 6.4334 | #279 6.4195
+[Epoch 283/400] LearningRate = 0.000018 EpochTime = 723.881 (s) Losses = ['26.5568', '19.4737', '11.5978', '6.2145', '26.5568']
+#283 26.6027 19.5595 11.7158 26.6027 | 6.4299 | #279 6.4195
+[Epoch 284/400] LearningRate = 0.000018 EpochTime = 730.571 (s) Losses = ['26.5646', '19.4912', '11.6101', '6.2217', '26.5646']
+#284 26.5904 19.5614 11.7344 26.5904 | 6.4395 | #279 6.4195
+[Epoch 285/400] LearningRate = 0.000017 EpochTime = 733.572 (s) Losses = ['26.5754', '19.4958', '11.6160', '6.2236', '26.5754']
+#285 26.6331 19.5730 11.7334 26.6331 | 6.4332 | #279 6.4195
+[Epoch 286/400] LearningRate = 0.000017 EpochTime = 728.229 (s) Losses = ['26.5786', '19.4849', '11.6002', '6.2127', '26.5786']
+#286 26.6321 19.5692 11.7442 26.6321 | 6.4458 | #279 6.4195
+[Epoch 287/400] LearningRate = 0.000017 EpochTime = 725.120 (s) Losses = ['26.5788', '19.5033', '11.6205', '6.2258', '26.5788']
+#287 26.6364 19.5639 11.7292 26.6364 | 6.4310 | #279 6.4195
+[Epoch 288/400] LearningRate = 0.000017 EpochTime = 726.588 (s) Losses = ['26.6288', '19.5258', '11.6379', '6.2402', '26.6288']
+#288 26.9018 19.6672 11.8098 26.9018 | 6.4944 | #279 6.4195
+[Epoch 289/400] LearningRate = 0.000016 EpochTime = 729.267 (s) Losses = ['26.6158', '19.5162', '11.6290', '6.2328', '26.6158']
+#289 26.6054 19.5598 11.7329 26.6054 | 6.4339 | #279 6.4195
+[Epoch 290/400] LearningRate = 0.000016 EpochTime = 723.940 (s) Losses = ['26.5459', '19.4896', '11.6081', '6.2180', '26.5459']
+#290 26.5992 19.5660 11.7431 26.5992 | 6.4576 | #279 6.4195
+[Epoch 291/400] LearningRate = 0.000016 EpochTime = 726.616 (s) Losses = ['26.5968', '19.4935', '11.6118', '6.2201', '26.5968']
+#291 26.6529 19.5447 11.7143 26.6529 | 6.4265 | #279 6.4195
+[Epoch 292/400] LearningRate = 0.000016 EpochTime = 724.160 (s) Losses = ['26.5869', '19.4981', '11.6129', '6.2199', '26.5869']
+#292 26.6441 19.5733 11.7309 26.6441 | 6.4374 | #279 6.4195
+[Epoch 293/400] LearningRate = 0.000015 EpochTime = 728.918 (s) Losses = ['26.6026', '19.5197', '11.6315', '6.2376', '26.6026']
+#293 26.5858 19.5516 11.7091 26.5858 | 6.4179 | #279 6.4195
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 294/400] LearningRate = 0.000015 EpochTime = 726.116 (s) Losses = ['26.5658', '19.4857', '11.6066', '6.2159', '26.5658']
+#294 26.6143 19.5715 11.7354 26.6143 | 6.4395 | #293 6.4179
+[Epoch 295/400] LearningRate = 0.000015 EpochTime = 725.106 (s) Losses = ['26.5828', '19.5132', '11.6249', '6.2291', '26.5828']
+#295 26.6130 19.5455 11.7238 26.6130 | 6.4321 | #293 6.4179
+[Epoch 296/400] LearningRate = 0.000015 EpochTime = 725.592 (s) Losses = ['26.5468', '19.4833', '11.6078', '6.2162', '26.5468']
+#296 26.6082 19.5417 11.7332 26.6082 | 6.4423 | #293 6.4179
+[Epoch 297/400] LearningRate = 0.000014 EpochTime = 725.971 (s) Losses = ['26.5659', '19.4825', '11.6037', '6.2175', '26.5659']
+#297 26.6251 19.5655 11.7233 26.6251 | 6.4266 | #293 6.4179
+[Epoch 298/400] LearningRate = 0.000014 EpochTime = 726.097 (s) Losses = ['26.5711', '19.4997', '11.6148', '6.2201', '26.5711']
+#298 26.6243 19.5629 11.7310 26.6243 | 6.4435 | #293 6.4179
+[Epoch 299/400] LearningRate = 0.000014 EpochTime = 727.828 (s) Losses = ['26.5657', '19.4953', '11.6156', '6.2234', '26.5657']
+#299 26.5975 19.5482 11.7179 26.5975 | 6.4269 | #293 6.4179
+[Epoch 300/400] LearningRate = 0.000014 EpochTime = 727.709 (s) Losses = ['26.5639', '19.4890', '11.6090', '6.2182', '26.5639']
+#300 26.6290 19.5769 11.7309 26.6290 | 6.4473 | #293 6.4179
+[Epoch 301/400] LearningRate = 0.000014 EpochTime = 724.597 (s) Losses = ['26.5845', '19.4983', '11.6095', '6.2207', '26.5845']
+#301 26.5700 19.5426 11.7199 26.5700 | 6.4266 | #293 6.4179
+[Epoch 302/400] LearningRate = 0.000013 EpochTime = 725.052 (s) Losses = ['26.5717', '19.4856', '11.6009', '6.2124', '26.5717']
+#302 26.5997 19.5553 11.7341 26.5997 | 6.4385 | #293 6.4179
+[Epoch 303/400] LearningRate = 0.000013 EpochTime = 723.871 (s) Losses = ['26.5563', '19.4886', '11.6071', '6.2179', '26.5563']
+#303 26.6293 19.5672 11.7425 26.6293 | 6.4454 | #293 6.4179
+[Epoch 304/400] LearningRate = 0.000013 EpochTime = 722.050 (s) Losses = ['26.5822', '19.5044', '11.6111', '6.2175', '26.5822']
+#304 26.5978 19.5690 11.7437 26.5978 | 6.4401 | #293 6.4179
+[Epoch 305/400] LearningRate = 0.000013 EpochTime = 721.192 (s) Losses = ['26.5385', '19.4703', '11.5956', '6.2099', '26.5385']
+#305 26.6870 19.5566 11.7361 26.6870 | 6.4405 | #293 6.4179
+[Epoch 306/400] LearningRate = 0.000013 EpochTime = 725.471 (s) Losses = ['26.5609', '19.4778', '11.5978', '6.2091', '26.5609']
+#306 26.6218 19.5676 11.7327 26.6218 | 6.4331 | #293 6.4179
+[Epoch 307/400] LearningRate = 0.000012 EpochTime = 724.540 (s) Losses = ['26.5515', '19.4850', '11.6076', '6.2189', '26.5515']
+#307 26.5955 19.5573 11.7406 26.5955 | 6.4394 | #293 6.4179
+[Epoch 308/400] LearningRate = 0.000012 EpochTime = 724.909 (s) Losses = ['26.5438', '19.4679', '11.5904', '6.2074', '26.5438']
+#308 26.5823 19.5539 11.7329 26.5823 | 6.4331 | #293 6.4179
+[Epoch 309/400] LearningRate = 0.000012 EpochTime = 728.989 (s) Losses = ['26.6126', '19.4967', '11.6164', '6.2247', '26.6126']
+#309 26.6255 19.5611 11.7428 26.6255 | 6.4496 | #293 6.4179
+[Epoch 310/400] LearningRate = 0.000012 EpochTime = 728.254 (s) Losses = ['26.5611', '19.4861', '11.6139', '6.2247', '26.5611']
+#310 26.5988 19.5596 11.7406 26.5988 | 6.4509 | #293 6.4179
+[Epoch 311/400] LearningRate = 0.000012 EpochTime = 726.528 (s) Losses = ['26.5443', '19.4826', '11.6079', '6.2167', '26.5443']
+#311 26.6012 19.5711 11.7518 26.6012 | 6.4493 | #293 6.4179
+[Epoch 312/400] LearningRate = 0.000011 EpochTime = 729.848 (s) Losses = ['26.5648', '19.4884', '11.6092', '6.2174', '26.5648']
+#312 26.5995 19.5563 11.7296 26.5995 | 6.4379 | #293 6.4179
+[Epoch 313/400] LearningRate = 0.000011 EpochTime = 730.679 (s) Losses = ['26.5927', '19.4901', '11.6095', '6.2206', '26.5927']
+#313 26.6051 19.5339 11.7196 26.6051 | 6.4381 | #293 6.4179
+[Epoch 314/400] LearningRate = 0.000011 EpochTime = 727.982 (s) Losses = ['26.5798', '19.4772', '11.6012', '6.2119', '26.5798']
+#314 26.6047 19.5592 11.7261 26.6047 | 6.4332 | #293 6.4179
+[Epoch 315/400] LearningRate = 0.000011 EpochTime = 729.013 (s) Losses = ['26.5601', '19.4708', '11.5954', '6.2073', '26.5601']
+#315 26.6033 19.5482 11.7277 26.6033 | 6.4443 | #293 6.4179
+[Epoch 316/400] LearningRate = 0.000011 EpochTime = 730.128 (s) Losses = ['26.5521', '19.4778', '11.6001', '6.2084', '26.5521']
+#316 26.5908 19.5365 11.7159 26.5908 | 6.4338 | #293 6.4179
+[Epoch 317/400] LearningRate = 0.000011 EpochTime = 728.468 (s) Losses = ['26.5198', '19.4676', '11.5936', '6.2098', '26.5198']
+#317 26.6008 19.5573 11.7321 26.6008 | 6.4356 | #293 6.4179
+[Epoch 318/400] LearningRate = 0.000010 EpochTime = 727.647 (s) Losses = ['26.5447', '19.4832', '11.6047', '6.2155', '26.5447']
+#318 26.6066 19.5410 11.7330 26.6066 | 6.4389 | #293 6.4179
+[Epoch 319/400] LearningRate = 0.000010 EpochTime = 729.157 (s) Losses = ['26.5624', '19.4847', '11.5983', '6.2094', '26.5624']
+#319 26.6208 19.5429 11.7113 26.6208 | 6.4278 | #293 6.4179
+[Epoch 320/400] LearningRate = 0.000010 EpochTime = 728.803 (s) Losses = ['26.5396', '19.4717', '11.5964', '6.2077', '26.5396']
+#320 26.6236 19.5290 11.7207 26.6236 | 6.4422 | #293 6.4179
+[Epoch 321/400] LearningRate = 0.000010 EpochTime = 730.157 (s) Losses = ['26.5469', '19.4730', '11.5947', '6.2070', '26.5469']
+#321 26.5884 19.5412 11.7282 26.5884 | 6.4369 | #293 6.4179
+[Epoch 322/400] LearningRate = 0.000010 EpochTime = 729.409 (s) Losses = ['26.5661', '19.4951', '11.6125', '6.2171', '26.5661']
+#322 26.5815 19.5412 11.7251 26.5815 | 6.4465 | #293 6.4179
+[Epoch 323/400] LearningRate = 0.000010 EpochTime = 724.539 (s) Losses = ['26.5326', '19.4580', '11.5862', '6.2054', '26.5326']
+#323 26.5812 19.5436 11.7154 26.5812 | 6.4310 | #293 6.4179
+[Epoch 324/400] LearningRate = 0.000010 EpochTime = 727.605 (s) Losses = ['26.5671', '19.4790', '11.5993', '6.2087', '26.5671']
+#324 26.5724 19.5351 11.7266 26.5724 | 6.4335 | #293 6.4179
+[Epoch 325/400] LearningRate = 0.000009 EpochTime = 725.644 (s) Losses = ['26.5326', '19.4433', '11.5741', '6.1947', '26.5326']
+#325 26.5968 19.5480 11.7204 26.5968 | 6.4351 | #293 6.4179
+[Epoch 326/400] LearningRate = 0.000009 EpochTime = 728.201 (s) Losses = ['26.5490', '19.4681', '11.5876', '6.2037', '26.5490']
+#326 26.5929 19.5550 11.7245 26.5929 | 6.4416 | #293 6.4179
+[Epoch 327/400] LearningRate = 0.000009 EpochTime = 724.705 (s) Losses = ['26.5292', '19.4721', '11.5999', '6.2121', '26.5292']
+#327 26.5509 19.5433 11.7178 26.5509 | 6.4267 | #293 6.4179
+[Epoch 328/400] LearningRate = 0.000009 EpochTime = 726.034 (s) Losses = ['26.5438', '19.4760', '11.5975', '6.2086', '26.5438']
+#328 26.5738 19.5304 11.7148 26.5738 | 6.4329 | #293 6.4179
+[Epoch 329/400] LearningRate = 0.000009 EpochTime = 729.172 (s) Losses = ['26.5734', '19.4993', '11.6163', '6.2189', '26.5734']
+#329 26.5620 19.5301 11.7042 26.5620 | 6.4099 | #293 6.4179
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 330/400] LearningRate = 0.000009 EpochTime = 728.350 (s) Losses = ['26.5697', '19.4955', '11.6118', '6.2153', '26.5697']
+#330 26.7866 19.5474 11.7298 26.7866 | 6.4412 | #329 6.4099
+[Epoch 331/400] LearningRate = 0.000009 EpochTime = 727.838 (s) Losses = ['26.5470', '19.4715', '11.5914', '6.2033', '26.5470']
+#331 26.5636 19.5317 11.7156 26.5636 | 6.4294 | #329 6.4099
+[Epoch 332/400] LearningRate = 0.000008 EpochTime = 728.386 (s) Losses = ['26.5614', '19.4871', '11.6017', '6.2100', '26.5614']
+#332 26.5743 19.5276 11.7162 26.5743 | 6.4320 | #329 6.4099
+[Epoch 333/400] LearningRate = 0.000008 EpochTime = 729.594 (s) Losses = ['26.5458', '19.4860', '11.6107', '6.2176', '26.5458']
+#333 26.5643 19.5295 11.7083 26.5643 | 6.4261 | #329 6.4099
+[Epoch 334/400] LearningRate = 0.000008 EpochTime = 726.809 (s) Losses = ['26.5344', '19.4660', '11.5906', '6.2029', '26.5344']
+#334 26.5717 19.5137 11.7127 26.5717 | 6.4367 | #329 6.4099
+[Epoch 335/400] LearningRate = 0.000008 EpochTime = 724.726 (s) Losses = ['26.5455', '19.4725', '11.5948', '6.2046', '26.5455']
+#335 26.5899 19.5537 11.7111 26.5899 | 6.4265 | #329 6.4099
+[Epoch 336/400] LearningRate = 0.000008 EpochTime = 730.799 (s) Losses = ['26.5525', '19.4713', '11.5941', '6.2080', '26.5525']
+#336 26.5707 19.5048 11.6991 26.5707 | 6.4265 | #329 6.4099
+[Epoch 337/400] LearningRate = 0.000008 EpochTime = 728.857 (s) Losses = ['26.5282', '19.4618', '11.5914', '6.2063', '26.5282']
+#337 26.5846 19.5371 11.7206 26.5846 | 6.4424 | #329 6.4099
+[Epoch 338/400] LearningRate = 0.000008 EpochTime = 725.467 (s) Losses = ['26.5623', '19.4771', '11.6020', '6.2133', '26.5623']
+#338 26.5628 19.5305 11.7129 26.5628 | 6.4317 | #329 6.4099
+[Epoch 339/400] LearningRate = 0.000008 EpochTime = 726.285 (s) Losses = ['26.5758', '19.4857', '11.6074', '6.2180', '26.5758']
+#339 26.5707 19.5119 11.6871 26.5707 | 6.4109 | #329 6.4099
+[Epoch 340/400] LearningRate = 0.000007 EpochTime = 728.854 (s) Losses = ['26.5319', '19.4572', '11.5866', '6.2016', '26.5319']
+#340 26.5906 19.5209 11.7113 26.5906 | 6.4269 | #329 6.4099
+[Epoch 341/400] LearningRate = 0.000007 EpochTime = 727.320 (s) Losses = ['26.5272', '19.4613', '11.5812', '6.1995', '26.5272']
+#341 26.5764 19.5412 11.7103 26.5764 | 6.4297 | #329 6.4099
+[Epoch 342/400] LearningRate = 0.000007 EpochTime = 727.095 (s) Losses = ['26.5201', '19.4641', '11.5876', '6.2031', '26.5201']
+#342 26.5943 19.5326 11.7144 26.5943 | 6.4302 | #329 6.4099
+[Epoch 343/400] LearningRate = 0.000007 EpochTime = 727.068 (s) Losses = ['26.5156', '19.4633', '11.5900', '6.2004', '26.5156']
+#343 26.5801 19.5455 11.7149 26.5801 | 6.4221 | #329 6.4099
+[Epoch 344/400] LearningRate = 0.000007 EpochTime = 728.526 (s) Losses = ['26.5085', '19.4515', '11.5784', '6.1968', '26.5085']
+#344 26.5799 19.5374 11.7167 26.5799 | 6.4211 | #329 6.4099
+[Epoch 345/400] LearningRate = 0.000007 EpochTime = 724.740 (s) Losses = ['26.5391', '19.4688', '11.5917', '6.2038', '26.5391']
+#345 26.5541 19.5326 11.7100 26.5541 | 6.4192 | #329 6.4099
+[Epoch 346/400] LearningRate = 0.000007 EpochTime = 726.322 (s) Losses = ['26.5527', '19.4835', '11.5991', '6.2112', '26.5527']
+#346 26.5774 19.5472 11.7186 26.5774 | 6.4316 | #329 6.4099
+[Epoch 347/400] LearningRate = 0.000007 EpochTime = 724.103 (s) Losses = ['26.5186', '19.4627', '11.5875', '6.2040', '26.5186']
+#347 26.5790 19.5378 11.7204 26.5790 | 6.4317 | #329 6.4099
+[Epoch 348/400] LearningRate = 0.000007 EpochTime = 730.482 (s) Losses = ['26.5091', '19.4562', '11.5775', '6.1963', '26.5091']
+#348 26.5628 19.5326 11.7153 26.5628 | 6.4298 | #329 6.4099
+[Epoch 349/400] LearningRate = 0.000007 EpochTime = 727.665 (s) Losses = ['26.5335', '19.4618', '11.5852', '6.1992', '26.5335']
+#349 26.5466 19.5276 11.7024 26.5466 | 6.4179 | #329 6.4099
+[Epoch 350/400] LearningRate = 0.000006 EpochTime = 730.946 (s) Losses = ['26.5283', '19.4639', '11.5871', '6.2012', '26.5283']
+#350 26.5689 19.5383 11.7085 26.5689 | 6.4216 | #329 6.4099
+[Epoch 351/400] LearningRate = 0.000006 EpochTime = 732.080 (s) Losses = ['26.5251', '19.4706', '11.5869', '6.2028', '26.5251']
+#351 26.5848 19.5576 11.7272 26.5848 | 6.4307 | #329 6.4099
+[Epoch 352/400] LearningRate = 0.000006 EpochTime = 730.033 (s) Losses = ['26.5155', '19.4514', '11.5776', '6.1972', '26.5155']
+#352 26.5507 19.5316 11.7160 26.5507 | 6.4260 | #329 6.4099
+[Epoch 353/400] LearningRate = 0.000006 EpochTime = 729.583 (s) Losses = ['26.5220', '19.4551', '11.5829', '6.2009', '26.5220']
+#353 26.5860 19.5288 11.7003 26.5860 | 6.4249 | #329 6.4099
+[Epoch 354/400] LearningRate = 0.000006 EpochTime = 728.152 (s) Losses = ['26.5125', '19.4514', '11.5785', '6.1957', '26.5125']
+#354 26.5523 19.5352 11.7093 26.5523 | 6.4189 | #329 6.4099
+[Epoch 355/400] LearningRate = 0.000006 EpochTime = 724.686 (s) Losses = ['26.4919', '19.4313', '11.5624', '6.1850', '26.4919']
+#355 26.5718 19.5362 11.7148 26.5718 | 6.4181 | #329 6.4099
+[Epoch 356/400] LearningRate = 0.000006 EpochTime = 721.840 (s) Losses = ['26.5462', '19.4737', '11.5939', '6.2071', '26.5462']
+#356 26.5327 19.5232 11.7057 26.5327 | 6.4213 | #329 6.4099
+[Epoch 357/400] LearningRate = 0.000006 EpochTime = 723.112 (s) Losses = ['26.5093', '19.4537', '11.5797', '6.1953', '26.5093']
+#357 26.5563 19.5257 11.6934 26.5563 | 6.4071 | #329 6.4099
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 358/400] LearningRate = 0.000006 EpochTime = 720.578 (s) Losses = ['26.5398', '19.4697', '11.5902', '6.2029', '26.5398']
+#358 26.5474 19.5040 11.7000 26.5474 | 6.4160 | #357 6.4071
+[Epoch 359/400] LearningRate = 0.000006 EpochTime = 722.682 (s) Losses = ['26.5515', '19.4820', '11.6047', '6.2104', '26.5515']
+#359 26.5718 19.5359 11.7185 26.5718 | 6.4222 | #357 6.4071
+[Epoch 360/400] LearningRate = 0.000005 EpochTime = 722.623 (s) Losses = ['26.5047', '19.4501', '11.5764', '6.1940', '26.5047']
+#360 26.5782 19.5232 11.6973 26.5782 | 6.4150 | #357 6.4071
+[Epoch 361/400] LearningRate = 0.000005 EpochTime = 722.853 (s) Losses = ['26.5626', '19.4632', '11.5882', '6.2021', '26.5626']
+#361 26.5684 19.5218 11.7117 26.5684 | 6.4223 | #357 6.4071
+[Epoch 362/400] LearningRate = 0.000005 EpochTime = 722.924 (s) Losses = ['26.5251', '19.4698', '11.5910', '6.2025', '26.5251']
+#362 26.5106 19.5348 11.7148 26.5106 | 6.4237 | #357 6.4071
+[Epoch 363/400] LearningRate = 0.000005 EpochTime = 727.326 (s) Losses = ['26.5182', '19.4497', '11.5775', '6.1934', '26.5182']
+#363 26.5445 19.5222 11.7019 26.5445 | 6.4139 | #357 6.4071
+[Epoch 364/400] LearningRate = 0.000005 EpochTime = 724.927 (s) Losses = ['26.5163', '19.4522', '11.5892', '6.2069', '26.5163']
+#364 26.5636 19.5211 11.7169 26.5636 | 6.4209 | #357 6.4071
+[Epoch 365/400] LearningRate = 0.000005 EpochTime = 722.766 (s) Losses = ['26.5446', '19.4786', '11.5934', '6.2061', '26.5446']
+#365 26.5467 19.5155 11.6969 26.5467 | 6.4126 | #357 6.4071
+[Epoch 366/400] LearningRate = 0.000005 EpochTime = 722.472 (s) Losses = ['26.5147', '19.4505', '11.5714', '6.1907', '26.5147']
+#366 26.5433 19.5429 11.7130 26.5433 | 6.4313 | #357 6.4071
+[Epoch 367/400] LearningRate = 0.000005 EpochTime = 723.919 (s) Losses = ['26.5143', '19.4557', '11.5796', '6.1935', '26.5143']
+#367 26.5822 19.5237 11.7137 26.5822 | 6.4216 | #357 6.4071
+[Epoch 368/400] LearningRate = 0.000005 EpochTime = 723.562 (s) Losses = ['26.5235', '19.4582', '11.5808', '6.1953', '26.5235']
+#368 26.5728 19.5229 11.7048 26.5728 | 6.4214 | #357 6.4071
+[Epoch 369/400] LearningRate = 0.000005 EpochTime = 723.601 (s) Losses = ['26.4991', '19.4350', '11.5643', '6.1847', '26.4991']
+#369 26.5743 19.5313 11.7109 26.5743 | 6.4239 | #357 6.4071
+[Epoch 370/400] LearningRate = 0.000005 EpochTime = 727.754 (s) Losses = ['26.5313', '19.4746', '11.5926', '6.2045', '26.5313']
+#370 26.5705 19.5234 11.6996 26.5705 | 6.4226 | #357 6.4071
+[Epoch 371/400] LearningRate = 0.000005 EpochTime = 724.121 (s) Losses = ['26.5185', '19.4519', '11.5702', '6.1887', '26.5185']
+#371 26.5728 19.5232 11.7126 26.5728 | 6.4325 | #357 6.4071
+[Epoch 372/400] LearningRate = 0.000005 EpochTime = 725.992 (s) Losses = ['26.5397', '19.4685', '11.5934', '6.2060', '26.5397']
+#372 26.5581 19.5280 11.7034 26.5581 | 6.4189 | #357 6.4071
+[Epoch 373/400] LearningRate = 0.000005 EpochTime = 725.013 (s) Losses = ['26.5267', '19.4543', '11.5823', '6.1961', '26.5267']
+#373 26.5659 19.4941 11.6880 26.5659 | 6.4008 | #357 6.4071
+Saved checkpoint to results/decouple/train_pcn_Log_2023_12_29_02_48_29/checkpoints/ckpt-best.pth ...
+[Epoch 374/400] LearningRate = 0.000004 EpochTime = 721.927 (s) Losses = ['26.5210', '19.4649', '11.5898', '6.1996', '26.5210']
+#374 26.5772 19.5215 11.7079 26.5772 | 6.4180 | #373 6.4008
+[Epoch 375/400] LearningRate = 0.000004 EpochTime = 726.331 (s) Losses = ['26.5020', '19.4404', '11.5711', '6.1910', '26.5020']
+#375 26.5528 19.5171 11.7026 26.5528 | 6.4155 | #373 6.4008
+[Epoch 376/400] LearningRate = 0.000004 EpochTime = 725.356 (s) Losses = ['26.4902', '19.4386', '11.5654', '6.1884', '26.4902']
+#376 26.5673 19.5294 11.7142 26.5673 | 6.4194 | #373 6.4008
+[Epoch 377/400] LearningRate = 0.000004 EpochTime = 726.128 (s) Losses = ['26.5157', '19.4520', '11.5800', '6.1960', '26.5157']
+#377 26.5388 19.5236 11.7048 26.5388 | 6.4180 | #373 6.4008
+[Epoch 378/400] LearningRate = 0.000004 EpochTime = 725.019 (s) Losses = ['26.5542', '19.4821', '11.6021', '6.2115', '26.5542']
+#378 26.5569 19.5241 11.7098 26.5569 | 6.4205 | #373 6.4008
+[Epoch 379/400] LearningRate = 0.000004 EpochTime = 726.690 (s) Losses = ['26.5224', '19.4578', '11.5778', '6.1947', '26.5224']
+#379 26.5402 19.5366 11.7150 26.5402 | 6.4191 | #373 6.4008
+[Epoch 380/400] LearningRate = 0.000004 EpochTime = 724.969 (s) Losses = ['26.5244', '19.4653', '11.5870', '6.2024', '26.5244']
+#380 26.5376 19.5077 11.7050 26.5376 | 6.4225 | #373 6.4008
+[Epoch 381/400] LearningRate = 0.000004 EpochTime = 727.603 (s) Losses = ['26.5386', '19.4609', '11.5845', '6.1988', '26.5386']
+#381 26.5271 19.5070 11.6933 26.5271 | 6.4110 | #373 6.4008
+[Epoch 382/400] LearningRate = 0.000004 EpochTime = 722.333 (s) Losses = ['26.5466', '19.4831', '11.5966', '6.2024', '26.5466']
+#382 26.5522 19.5180 11.6987 26.5522 | 6.4063 | #373 6.4008
+[Epoch 383/400] LearningRate = 0.000004 EpochTime = 722.157 (s) Losses = ['26.5304', '19.4598', '11.5822', '6.1976', '26.5304']
+#383 26.5567 19.5221 11.7061 26.5567 | 6.4145 | #373 6.4008
+[Epoch 384/400] LearningRate = 0.000004 EpochTime = 722.587 (s) Losses = ['26.5166', '19.4578', '11.5810', '6.1961', '26.5166']
+#384 26.5675 19.5157 11.7066 26.5675 | 6.4209 | #373 6.4008
+[Epoch 385/400] LearningRate = 0.000004 EpochTime = 723.590 (s) Losses = ['26.5227', '19.4608', '11.5851', '6.1977', '26.5227']
+#385 26.5447 19.5202 11.7065 26.5447 | 6.4269 | #373 6.4008
+[Epoch 386/400] LearningRate = 0.000004 EpochTime = 720.109 (s) Losses = ['26.5208', '19.4595', '11.5797', '6.1940', '26.5208']
+#386 26.5286 19.5376 11.7246 26.5286 | 6.4239 | #373 6.4008
+[Epoch 387/400] LearningRate = 0.000004 EpochTime = 720.907 (s) Losses = ['26.5074', '19.4382', '11.5642', '6.1841', '26.5074']
+#387 26.5443 19.5250 11.7145 26.5443 | 6.4275 | #373 6.4008
+[Epoch 388/400] LearningRate = 0.000004 EpochTime = 719.915 (s) Losses = ['26.5149', '19.4481', '11.5742', '6.1931', '26.5149']
+#388 26.5447 19.5210 11.7177 26.5447 | 6.4243 | #373 6.4008
+[Epoch 389/400] LearningRate = 0.000004 EpochTime = 719.552 (s) Losses = ['26.5174', '19.4488', '11.5801', '6.1945', '26.5174']
+#389 26.5748 19.5194 11.7081 26.5748 | 6.4193 | #373 6.4008
+[Epoch 390/400] LearningRate = 0.000003 EpochTime = 722.670 (s) Losses = ['26.5073', '19.4559', '11.5749', '6.1914', '26.5073']
+#390 26.5565 19.5194 11.7128 26.5565 | 6.4268 | #373 6.4008
+[Epoch 391/400] LearningRate = 0.000003 EpochTime = 722.968 (s) Losses = ['26.5161', '19.4464', '11.5741', '6.1887', '26.5161']
+#391 26.5553 19.5278 11.7075 26.5553 | 6.4214 | #373 6.4008
+[Epoch 392/400] LearningRate = 0.000003 EpochTime = 721.628 (s) Losses = ['26.5350', '19.4704', '11.5908', '6.2037', '26.5350']
+#392 26.5337 19.5191 11.7122 26.5337 | 6.4202 | #373 6.4008
+[Epoch 393/400] LearningRate = 0.000003 EpochTime = 721.501 (s) Losses = ['26.5216', '19.4637', '11.5870', '6.1993', '26.5216']
+#393 26.5366 19.5104 11.6985 26.5366 | 6.4046 | #373 6.4008
+[Epoch 394/400] LearningRate = 0.000003 EpochTime = 719.160 (s) Losses = ['26.4929', '19.4328', '11.5640', '6.1847', '26.4929']
+#394 26.5342 19.5226 11.7051 26.5342 | 6.4162 | #373 6.4008
+[Epoch 395/400] LearningRate = 0.000003 EpochTime = 723.669 (s) Losses = ['26.5071', '19.4488', '11.5807', '6.1920', '26.5071']
+#395 26.5244 19.5235 11.7016 26.5244 | 6.4165 | #373 6.4008
+[Epoch 396/400] LearningRate = 0.000003 EpochTime = 722.893 (s) Losses = ['26.4984', '19.4420', '11.5733', '6.1903', '26.4984']
+#396 26.5556 19.5268 11.7085 26.5556 | 6.4229 | #373 6.4008
+[Epoch 397/400] LearningRate = 0.000003 EpochTime = 724.247 (s) Losses = ['26.5247', '19.4593', '11.5831', '6.1978', '26.5247']
+#397 26.5330 19.5165 11.7028 26.5330 | 6.4231 | #373 6.4008
+[Epoch 398/400] LearningRate = 0.000003 EpochTime = 720.983 (s) Losses = ['26.5403', '19.4674', '11.5845', '6.1966', '26.5403']
+#398 26.5367 19.5186 11.7062 26.5367 | 6.4221 | #373 6.4008
+[Epoch 399/400] LearningRate = 0.000003 EpochTime = 717.138 (s) Losses = ['26.4804', '19.4289', '11.5614', '6.1843', '26.4804']
+#399 26.5660 19.5188 11.7037 26.5660 | 6.4229 | #373 6.4008
+[Epoch 400/400] LearningRate = 0.000003 EpochTime = 719.797 (s) Losses = ['26.5324', '19.4774', '11.6012', '6.2085', '26.5324']
+#400 26.5526 19.5171 11.7012 26.5526 | 6.4173 | #373 6.4008
