@@ -81,7 +81,7 @@ Here, we provide a pretrained weight:
 
 | Dataset | Weight  | Log |
 |  ----  | ----  |  ----  |
-|  PCN  | x  | y |
+|  PCN  | [url](https://github.com/EasyRy/CRA-PCN/blob/main/pretrain/pcn/ckpt-best.pth)  | [url](https://github.com/EasyRy/CRA-PCN/blob/main/pretrain/pcn/log.txt) |
 
 ❗Note: We have refactored our codes after the acceptance of AAAI'24 and retrained the model on 6x Nvidia GTX 1080 Ti graphic cards with a batch size of 60.
 
