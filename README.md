@@ -1,6 +1,6 @@
 # CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers
 
-This repo contains a PyTorch implementation for **CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24).
+This repo contains a PyTorch implementation for [**CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24)](https://arxiv.org/abs/2401.01552).
 
 ![example](./vis.png) 
 
