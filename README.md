@@ -1,6 +1,6 @@
 # CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers
 
-This repo contains a PyTorch implementation for **CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24).
+This repo contains a PyTorch implementation for [**CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24)](https://arxiv.org/abs/2401.01552).
 
 ![example](./vis.png) 
 
@@ -81,7 +81,7 @@ Here, we provide a pretrained weight:
 
 | Dataset | Weight  | Log |
 |  ----  | ----  |  ----  |
-|  PCN  | x  | y |
+|  PCN  | [url](https://github.com/EasyRy/CRA-PCN/blob/main/pretrain/pcn/ckpt-best.pth)  | [url](https://github.com/EasyRy/CRA-PCN/blob/main/pretrain/pcn/log.txt) |
 
 ❗Note: We have refactored our codes after the acceptance of AAAI'24 and retrained the model on 6x Nvidia GTX 1080 Ti graphic cards with a batch size of 60.
 
