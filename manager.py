@@ -24,7 +24,7 @@ import utils.helpers
 from utils.average_meter import AverageMeter
 from utils.metrics import Metrics
 from utils.schedular import GradualWarmupScheduler
-from utils.loss_utils_clamp import get_loss_clamp, get_loss_mvp
+from utils.loss_utils_clamp import get_loss_clamp
 from utils.ply import read_ply, write_ply
 import pointnet_utils.pc_util as pc_util
 from PIL import Image
@@ -800,14 +800,10 @@ class Manager_shapenet55:
 
 
         return test_losses.avg(3)
-
+"""
 class Manager_MVP:
     def __init__(self, model, cfg):
-        """
-        Initialize parameters and start training/testing
-        :param model: network object
-        :param cfg: configuration object
-        """
+
 
         ############
         # Parameters
@@ -1136,3 +1132,4 @@ class Manager_MVP:
 
 
         return test_losses.avg(3)
+"""
