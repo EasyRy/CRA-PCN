@@ -195,6 +195,6 @@ This file is used to control the training/testing process, where *Manager* is ap
 It is a common phenomenon due to the randomness of farthest point sampling.
 
 
-## 5. Acknowledgement
+##[Acknowledgement]
 This repo is heavily based on [SeedFormer](https://github.com/hrzhou2/seedformer), [SnowflakeNet](https://github.com/AllenXiangX/SnowflakeNet), [GRNet](https://github.com/hzxie/GRNet), [VRCNet](https://github.com/paul007pl/VRCNet), and [PoinTr](https://github.com/yuxumin/PoinTr).
 We thank for their excellent works.
