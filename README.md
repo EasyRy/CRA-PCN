@@ -1,11 +1,16 @@
 # CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers
 
-This repo contains a PyTorch implementation for [**CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24)](https://arxiv.org/abs/2401.01552).
-
 ![example](./vis.png) 
 
+## [CRA-PCN]
 
-## 1. Installation
+This repo contains a PyTorch implementation for **CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24). [**arXiv**](https://arxiv.org/abs/2401.01552)
+
+## [News]
+**[2024-03-09]**  We add a new seed generator implemented with [Deconvolution](https://github.com/AllenXiangX/SnowflakeNet). 
+
+
+## [Installation]
 ❗Tips: If you have a configured virtual environment for [SeedFormer](https://github.com/hrzhou2/seedformer) 
 (or [SnowflakeNet](https://github.com/AllenXiangX/SnowflakeNet), [PoinTr](https://github.com/yuxumin/PoinTr)), you can reuse it instead of installing a new one.
 ### Requirements
@@ -27,7 +32,7 @@ sh install.sh
 ```
 
 
-## 2. Data preparation
+## [Data preparation]
 ### PCN dataset
 ❗Tips: If you already have PCN dataset, you should change the data path in train_pcn.py and test_pcn.py:
 ```
@@ -53,6 +58,10 @@ __C.DATASETS.SHAPENET55.COMPLETE_POINTS_PATH  =  './data/ShapeNet55-34/shapenet_
 
 Otherwise, you need to download ShapeNet-55/34 dataset from [here](https://github.com/yuxumin/PoinTr/blob/master/DATASET.md), and then unzip it and put it under ./data.
 
+### MVP dataset
+You can download MVP dataset from this [link](https://drive.google.com/drive/folders/1XxZ4M_dOB3_OG1J6PnpNvrGTie5X9Vk), and put these two .h5 files in MVP folder.
+The input & output resolution is 2048.
+
 ❗After data preparation, the overall directory structure should be:
 ```
 │CRA-PCN/
@@ -60,12 +69,15 @@ Otherwise, you need to download ShapeNet-55/34 dataset from [here](https://githu
 ├──data/
 │   ├──ShapeNet55-34/
 │   ├──PCN/
+│   ├──MVP/
+│   │   ├──MVP_Test_CP.h5
+│   │   ├──MVP_Train_CP.h5
 ├──.......
 ```
 
 
 
-## 3. Training & Testing
+## [Training & Testing]
 
 ### Training & Testing on PCN dataset
 Training:
@@ -145,8 +157,21 @@ python test_shapenet.py --pretrained ./pretrain/shapenet/shapenet34.pth --mode e
 ```
 Please refer to [PoinTr](https://github.com/yuxumin/PoinTr) for more details.
 
+### Training & Testing on MVP dataset
+Training 
+```
+python train_mvp.py 
+```
+The training log will be saved at:
+```
+__C.DIR.OUT_PATH  = 'results/mvp_result' # line 143
+```
 
-## 4. Some details about training
+Testing 
+```
+python test_mvp.py 
+```
+## [Some details about training]
 
 
 ### Training/testing configuration  
@@ -170,5 +195,5 @@ It is a common phenomenon due to the randomness of farthest point sampling.
 
 
 ## 5. Acknowledgement
-This repo is heavily based on [SeedFormer](https://github.com/hrzhou2/seedformer), [SnowflakeNet](https://github.com/AllenXiangX/SnowflakeNet), [GRNet](https://github.com/hzxie/GRNet), and [PoinTr](https://github.com/yuxumin/PoinTr).
+This repo is heavily based on [SeedFormer](https://github.com/hrzhou2/seedformer), [SnowflakeNet](https://github.com/AllenXiangX/SnowflakeNet), [GRNet](https://github.com/hzxie/GRNet), [VRCNet](https://github.com/paul007pl/VRCNet), and [PoinTr](https://github.com/yuxumin/PoinTr).
 We thank for their excellent works.
