@@ -9,6 +9,7 @@ This repo contains a PyTorch implementation for **CRA-PCN: Point Cloud Completio
 ## [News]
 **[2024-03-09]**  We add a new seed generator implemented with [Deconvolution](https://github.com/AllenXiangX/SnowflakeNet). 
 
+**[2024-03-09]**  We add training and testing codes for MVP dataset. 
 
 ## [Installation]
 ❗Tips: If you have a configured virtual environment for [SeedFormer](https://github.com/hrzhou2/seedformer) 
