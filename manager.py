@@ -1,18 +1,3 @@
-'''
-==============================================================
-
-SeedFormer: Point Cloud Completion
--> Training/Testing Manager
-
-==============================================================
-
-Author: Haoran Zhou
-Date: 2022-5-31
-
-==============================================================
-'''
-
-
 import os
 import numpy as np
 import torch
@@ -24,17 +9,10 @@ import utils.helpers
 from utils.average_meter import AverageMeter
 from utils.metrics import Metrics
 from utils.schedular import GradualWarmupScheduler
-from utils.loss_utils_clamp import get_loss_clamp
+from utils.loss_utils_clamp import get_loss_clamp, get_loss_mvp
 from utils.ply import read_ply, write_ply
 import pointnet_utils.pc_util as pc_util
 from PIL import Image
-
-
-# ----------------------------------------------------------------------------------------------------------------------
-#
-#           Trainer
-#       \***************/
-#
 
 class Manager:
 
@@ -375,6 +353,7 @@ class Manager:
 
 
         return test_losses.avg(3)
+
 
 class Manager_shapenet55:
 
@@ -800,7 +779,8 @@ class Manager_shapenet55:
 
 
         return test_losses.avg(3)
-"""
+
+
 class Manager_MVP:
     def __init__(self, model, cfg):
 
@@ -929,12 +909,6 @@ class Manager_MVP:
             avg_cd3 = total_cd_p3 / n_batches
             avg_partial = total_partial / n_batches
 
-            # Update learning rate
-            # if self.epoch in self.lr_decays:
-            #     for param_group in self.optimizer.param_groups:
-            #         param_group['lr'] *= self.lr_decays[self.epoch]
-            # else:
-            #     raise ValueError('Epoch exceeds max limit!')
             epoch_end_time = time.time()
 
             # Training record
@@ -942,194 +916,15 @@ class Manager_MVP:
                 '[Epoch %d/%d] LearningRate = %f EpochTime = %.3f (s) Losses = %s' %
                 (epoch_idx, cfg.TRAIN.N_EPOCHS, learning_rate, epoch_end_time - epoch_start_time, ['%.4f' % l for l in [avg_cdc, avg_cd1, avg_cd2, avg_cd3, avg_partial]]))
 
-            # Validate the current model
-            #cd_eval = self.validate(cfg, model=model, val_data_loader=val_data_loader)
-
-            # Save checkpoints
-            #if cd_eval < self.best_metrics:
-                #self.best_epoch = epoch_idx
-            file_name = 'ckpt-best.pth' 
-            output_path = os.path.join(cfg.DIR.CHECKPOINTS, str(epoch_idx) + file_name)
-            torch.save({
-                'epoch_index': epoch_idx,
-                'model': model.state_dict()
-            }, output_path)
-
-            #print('Saved checkpoint to %s ...' % output_path)
-            #if cd_eval < self.best_metrics:
-            #        self.best_metrics = cd_eval
+            # save checkpoint 
+            if epoch_idx % 5 == 0:
+                file_name = 'ckpt-best.pth' 
+                output_path = os.path.join(cfg.DIR.CHECKPOINTS, str(epoch_idx) + file_name)
+                torch.save({
+                    'epoch_index': epoch_idx,
+                    'model': model.state_dict()
+                }, output_path)
 
         # training end
         self.train_record_file.close()
         self.test_record_file.close()
-
-
-    def validate(self, cfg, model=None, val_data_loader=None, outdir=None):
-        # Enable the inbuilt cudnn auto-tuner to find the best algorithm to use
-        torch.backends.cudnn.benchmark = True
-
-        # Switch models to evaluation mode
-        model.eval()
-
-        n_samples = len(val_data_loader)
-        test_losses = AverageMeter(['cdc', 'cd1', 'cd2', 'cd3', 'partial_matching'])
-        test_metrics = AverageMeter(Metrics.names())
-
-        # Start testing
-        for model_idx, (label, partial, gt) in enumerate(val_data_loader):
-            taxonomy_id = taxonomy_id[0] if isinstance(taxonomy_id[0], str) else taxonomy_id[0].item()
-            #model_id = model_id[0]
-
-            with torch.no_grad():
-            #    for k, v in data.items():
-            #        data[k] = utils.helpers.var_or_cuda(v)
-
-                # unpack data
-                #partial = data['partial_cloud']
-                #gt = data['gtcloud']
-                partial = partial.float().cuda()
-                gt = gt.float().cuda()
-                # forward
-                pcds_pred = model(partial.contiguous())
-                loss_total, losses, _ = get_loss_mvp(pcds_pred, partial, gt, sqrt=True)
-
-                # get metrics
-                cdc = losses[0].item() * 1e3
-                cd1 = losses[1].item() * 1e3
-                cd2 = losses[2].item() * 1e3
-                cd3 = losses[3].item() * 1e3
-                partial_matching = losses[4].item() * 1e3
-
-                _metrics = [cd3]
-                test_losses.update([cdc, cd1, cd2, cd3, partial_matching])
-                test_metrics.update(_metrics)
-
-        # Record testing results
-        message = '#{:d} {:.4f} {:.4f} {:.4f} {:.4f} | {:.4f} | #{:d} {:.4f}'.format(self.epoch, test_losses.avg(0), test_losses.avg(1), test_losses.avg(2), test_losses.avg(4), test_losses.avg(3), self.best_epoch, self.best_metrics)
-        self.test_record(message)
-
-        return test_losses.avg(3)
-
-
-    def test(self, cfg, model=None, test_data_loader=None, outdir=None):
-        # Enable the inbuilt cudnn auto-tuner to find the best algorithm to use
-        torch.backends.cudnn.benchmark = True
-
-        # Switch models to evaluation mode
-        model.eval()
-
-        n_samples = len(test_data_loader)
-        test_losses = AverageMeter(['cdc', 'cd1', 'cd2', 'cd3', 'partial_matching'])
-        test_metrics = AverageMeter(Metrics.names())
-        category_metrics = dict()
-        category_models = dict()
-
-        # Start testing
-        for model_idx, (taxonomy_id, model_id, data) in enumerate(test_data_loader):
-            taxonomy_id = taxonomy_id[0] if isinstance(taxonomy_id[0], str) else taxonomy_id[0].item()
-            #model_id = model_id[0]
-
-            with torch.no_grad():
-                for k, v in data.items():
-                    data[k] = utils.helpers.var_or_cuda(v)
-
-                partial = data['partial_cloud']
-                gt = data['gtcloud']
-
-                b, n, _ = partial.shape
-
-                pcds_pred = model(partial.contiguous())
-                loss_total, losses, _ = get_loss_clamp(pcds_pred, partial, gt, sqrt=True)
-
-
-                cdc = losses[0].item() * 1e3
-                cd1 = losses[1].item() * 1e3
-                cd2 = losses[2].item() * 1e3
-                cd3 = losses[3].item() * 1e3
-                partial_matching = losses[4].item() * 1e3
-
-                _metrics = [cd3]
-                test_losses.update([cdc, cd1, cd2, cd3, partial_matching])
-
-                test_metrics.update(_metrics)
-                if taxonomy_id not in category_metrics:
-                    category_metrics[taxonomy_id] = AverageMeter(Metrics.names())
-                category_metrics[taxonomy_id].update(_metrics)
-
-                # output to file
-                if outdir:
-                    if not os.path.exists(os.path.join(outdir, taxonomy_id)):
-                        os.makedirs(os.path.join(outdir, taxonomy_id))
-                    if not os.path.exists(os.path.join(outdir, taxonomy_id+'_images')):
-                        os.makedirs(os.path.join(outdir, taxonomy_id+'_images'))
-                    # save pred, gt, partial pcds 
-                    pred = pcds_pred[-1]
-                    for mm, model_name in enumerate(model_id):
-                        output_file = os.path.join(outdir, taxonomy_id, model_name)
-                        write_ply(output_file + '_pred.ply', pred[mm, :].detach().cpu().numpy(), ['x', 'y', 'z'])
-                        write_ply(output_file + '_gt.ply', gt[mm, :].detach().cpu().numpy(), ['x', 'y', 'z'])
-                        write_ply(output_file + '_partial.ply', partial[mm, :].detach().cpu().numpy(), ['x', 'y', 'z'])
-                        # record
-                        if taxonomy_id not in category_models:
-                            category_models[taxonomy_id] = []
-                        category_models[taxonomy_id].append((model_name, cd3))
-                        # output img files
-                        img_filename = os.path.join(outdir, taxonomy_id+'_images', model_name+'.jpg')
-                        output_img = pc_util.point_cloud_three_views(pred[mm, :].detach().cpu().numpy(), diameter=7)
-                        output_img = (output_img*255).astype('uint8')
-                        im = Image.fromarray(output_img)
-                        im.save(img_filename)
-
-
-        # Record category model cds
-        if outdir:
-            for cat in list(category_models.keys()):
-                model_tuples = category_models[cat]
-                with open(os.path.join(outdir, cat+'.txt'), 'w') as record_file:
-                    # sort by cd
-                    for tt in sorted(model_tuples, key=lambda x:x[1]):
-                        record_file.write('{:s}  {:.4f}\n'.format(tt[0], tt[1])) 
-
-        # # Print testing results
-        # print('============================ TEST RESULTS ============================')
-        # print('Taxonomy', end='\t')
-        # print('#Sample', end='\t')
-        # for metric in test_metrics.items:
-        #     print(metric, end='\t')
-        # print()
-
-        # for taxonomy_id in category_metrics:
-        #     print(taxonomy_id, end='\t')
-        #     print(category_metrics[taxonomy_id].count(0), end='\t')
-        #     for value in category_metrics[taxonomy_id].avg():
-        #         print('%.4f' % value, end='\t')
-        #     print()
-
-        # print('Overall', end='\t\t\t')
-        # for value in test_metrics.avg():
-        #     print('%.4f' % value, end='\t')
-        # print('\n')
-
-        # print('Epoch ', self.epoch, end='\t')
-        # for value in test_losses.avg():
-        #     print('%.4f' % value, end='\t')
-        # print('\n')
-
-        # Record category results
-        self.train_record('============================ TEST RESULTS ============================')
-        self.train_record('Taxonomy\t#Sample\t' + '\t'.join(test_metrics.items))
-
-        for taxonomy_id in category_metrics:
-            message = '{:s}\t{:d}\t'.format(taxonomy_id, category_metrics[taxonomy_id].count(0)) 
-            message += '\t'.join(['%.4f' % value for value in category_metrics[taxonomy_id].avg()])
-            self.train_record(message)
-
-        self.train_record('Overall\t\t' + '\t'.join(['%.4f' % value for value in test_metrics.avg()]))
-
-        # record testing results
-        message = '#{:d} {:.4f} {:.4f} {:.4f} {:.4f} | {:.4f} | #{:d} {:.4f}'.format(self.epoch, test_losses.avg(0), test_losses.avg(1), test_losses.avg(2), test_losses.avg(4), test_losses.avg(3), self.best_epoch, self.best_metrics)
-        self.test_record(message)
-
-
-        return test_losses.avg(3)
-"""

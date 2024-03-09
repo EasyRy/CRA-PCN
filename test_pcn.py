@@ -13,13 +13,11 @@ from pprint import pprint
 from manager import Manager
 import math
 TRAIN_NAME = os.path.splitext(os.path.basename(__file__))[0]
-from crapcn import CRAPCN
-# ----------------------------------------------------------------------------------------------------------------------
-#
-#           Arguments 
-#       \******************/
-#
+from models.crapcn import CRAPCN, CRAPCN_d
 
+
+
+#  Arguments 
 parser = argparse.ArgumentParser()
 parser.add_argument('--desc', type=str, default='Training/Testing CRA-PCN', help='description')
 parser.add_argument('--net_model', type=str, default='model', help='Import module.')
@@ -29,12 +27,8 @@ parser.add_argument('--output', type=int, default=True, help='Output testing res
 parser.add_argument('--pretrained', type=str, default='', help='Pretrained path for testing.')
 args = parser.parse_args()
 
-
+# Configuration for PCN
 def PCNConfig():
-
-    #######################
-    # Configuration for PCN
-    #######################
 
     __C                                              = edict()
     cfg                                              = __C
@@ -115,11 +109,6 @@ def PCNConfig():
 
 
 
-
-
-
-
-
 def test_net(cfg):
     # Enable the inbuilt cudnn auto-tuner to find the best algorithm to use
     torch.backends.cudnn.benchmark = True
@@ -137,20 +126,6 @@ def test_net(cfg):
                                                   collate_fn=utils.data_loaders.collate_fn,
                                                   pin_memory=True,
                                                   shuffle=False)
-    """
-    # Path for pretrained model
-    args.pretrained = 'results/pcn_best' 
-    if args.pretrained == '':
-        list_trains = os.listdir(cfg.DIR.OUT_PATH)
-        list_pretrained = [train_name for train_name in list_trains if train_name.startswith(TRAIN_NAME+'_Log')]
-        if len(list_pretrained) != 1:
-            raise ValueError('Find {:d} models. Please specify a path for testing.'.format(len(list_pretrained)))
-
-        cfg.DIR.PRETRAIN = list_pretrained[0]
-    else:
-        cfg.DIR.PRETRAIN = args.pretrained
-    """
-
 
     # Set up folders for logs and checkpoints
     #cfg.DIR.TEST_PATH = os.path.join(cfg.DIR.TEST_PATH, cfg.DIR.PRETRAIN)
@@ -165,25 +140,18 @@ def test_net(cfg):
     # Prepare Network Model
     #######################
 
-    # Model = import_module(args.net_model)
-    # model = Model.__dict__[args.arch_model](up_factors=cfg.NETWORK.UPSAMPLE_FACTORS)
-    model = CRAPCN()
+    model = CRAPCN() # CRAPCN_d
     if torch.cuda.is_available():
         model = torch.nn.DataParallel(model).cuda()
 
     # load pretrained model
     print('Recovering from %s ...' % (cfg.CONST.WEIGHTS))
     checkpoint = torch.load(cfg.CONST.WEIGHTS)
-    #print(checkpoint.keys())
-    model.load_state_dict(checkpoint['model'])
 
-    ##################
-    # Training Manager
-    ##################
+    model.load_state_dict(checkpoint['model'])
 
     manager = Manager(model, cfg)
 
-    # Start training
     manager.test(cfg, model, val_data_loader, outdir=cfg.DIR.RESULTS if args.output else None)
         
 
@@ -195,24 +163,8 @@ def set_seed(seed):
 
 
 if __name__ == '__main__':
-    # Check python version
-    # seed = 2
-    # set_seed(seed)
-    
+
     print('cuda available ', torch.cuda.is_available())
-
-    # Init config
     cfg = PCNConfig()
-
-    # setting
-    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-    os.environ["CUDA_VISIBLE_DEVICES"] = cfg.CONST.DEVICE
-
-    # if not args.test and not args.inference:
-    #     train_net(cfg)
-    # else:
-    #     if args.test        
     test_net(cfg)
-    #    else:
-    #        inference_net(cfg)
 

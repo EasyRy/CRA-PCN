@@ -281,7 +281,7 @@ class UpTransformer(nn.Module):
 
         return y+identity
 
-# seed generator
+# seed generator using upsample transformer
 class SeedGenerator(nn.Module):
     def __init__(self, feat_dim = 512, seed_dim = 128, n_knn = 16, factor = 2, attn_channel = True):
         super().__init__()
@@ -297,6 +297,30 @@ class SeedGenerator(nn.Module):
 
     def forward(self, feat, patch_xyz, patch_feat, partial):
         x1 = self.uptrans(patch_xyz, patch_feat, patch_xyz, patch_feat)  # (B, 128, 256)
+        x1 = self.mlp_1(torch.cat([x1, feat.repeat((1, 1, x1.size(2)))], 1))
+        x2 = self.mlp_2(x1)
+        x3 = self.mlp_3(torch.cat([x2, feat.repeat((1, 1, x2.size(2)))], 1))  # (B, 128, 256)
+        seed = self.mlp_4(x3)  # (B, 3, 256)
+        x = fps_subsample(torch.cat([seed.permute(0, 2, 1).contiguous(), partial], dim=1), 512).permute(0, 2, 1).contiguous() # b, 3, 512
+        return seed, x3, x
+
+# seed generator using deconvolution
+class SeedGenerator_Deconv(nn.Module):
+    def __init__(self, feat_dim = 512, seed_dim = 128, n_knn = 16, factor = 2, attn_channel = True):
+        super().__init__()
+        num_pc = 256
+        self.ps = nn.ConvTranspose1d(feat_dim, 128, num_pc, bias=True)
+        self.mlp_1 = MLP_Res(in_dim = feat_dim + 128, hidden_dim = 128, out_dim = 128)
+        self.mlp_2 = MLP_Res(in_dim = 128, hidden_dim = 64, out_dim = 128)
+        self.mlp_3 = MLP_Res(in_dim = feat_dim + 128, hidden_dim = 128, out_dim = seed_dim)
+        self.mlp_4 = nn.Sequential(
+            nn.Conv1d(seed_dim, 64, 1),
+            nn.ReLU(),
+            nn.Conv1d(64, 3, 1)
+        )
+
+    def forward(self, feat, patch_xyz, patch_feat, partial):
+        x1 = self.ps(feat)  # (B, 128, 256)
         x1 = self.mlp_1(torch.cat([x1, feat.repeat((1, 1, x1.size(2)))], 1))
         x2 = self.mlp_2(x1)
         x3 = self.mlp_3(torch.cat([x2, feat.repeat((1, 1, x2.size(2)))], 1))  # (B, 128, 256)
@@ -333,17 +357,6 @@ class DeConv(nn.Module):
         new_xyz = self.upper(xyz) + torch.tanh(delta)
         return new_xyz
 
-class FFN(nn.Module):
-    def __init__(self, in_dim = 128, dim = 512, out_dim = 128):
-        super().__init__()
-        self.conv = nn.Sequential(
-            nn.Conv1d(in_dim, dim, 1),
-            nn.ReLU(inplace = True),
-            nn.Conv1d(dim, out_dim, 1)
-        )
-
-    def forward(self, f):
-        return f + self.conv(f)
 
 # upsampling block 
 class UpBlock(nn.Module):
@@ -351,19 +364,18 @@ class UpBlock(nn.Module):
         super().__init__()
         self.pn = PN()
         self.inter_crt = CRT(dim_in = 128, is_inter = True, down_rates = down_rates, knns = knns)
-        # self.ffn = FFN(128, 512, 128)
         self.intra_crt = CRT(dim_in = 128, is_inter = False, down_rates = down_rates, knns = knns)
         self.deconv = DeConv(up_factor = up_factor)
 
     def forward(self, p, gf, pre, fps_idxs_1, fps_idxs_2):
         h = self.pn(p, gf)
         g, fps_idxs_q1, fps_idxs_s1 = self.inter_crt([p, h], pre, None, fps_idxs_1)
-        # g = self.ffn(g)
         f, _, _ = self.intra_crt([p, g], [p, g], fps_idxs_q1, fps_idxs_q1)
         new_xyz = self.deconv(p, f)
         return new_xyz, f, fps_idxs_q1, fps_idxs_s1
 
 # decoder
+
 class Decoder(nn.Module):
     def __init__(self, ):
         super().__init__()
@@ -395,7 +407,23 @@ class Decoder_sn55(nn.Module):
         all_pc = [p_sd.permute(0, 2, 1).contiguous(), p1.permute(0, 2, 1).contiguous(), \
             p2.permute(0, 2, 1).contiguous(), p3.permute(0, 2, 1).contiguous()]
         return all_pc
-# CRA-PCN
+
+class Decoder_mvp(nn.Module):
+    def __init__(self, ):
+        super().__init__()
+        self.ub0 = UpBlock(feat_dim = 512, down_rates = [1, 2, 2], knns = [16, 12, 8], up_factor = 1)
+        self.ub1 = UpBlock(feat_dim = 512, down_rates = [1, 2, 2], knns = [16, 12, 8], up_factor = 4)
+
+    def forward(self, global_f, p0, p_sd, f_sd):
+        p1, f0, p0_fps_idxs_122, _ = self.ub0(p0, global_f, [p_sd, f_sd], None, None)
+        p2, f1, _, __ = self.ub1(p1, global_f, [p0, f0], None, p0_fps_idxs_122)
+        
+        all_pc = [p_sd.permute(0, 2, 1).contiguous(), p1.permute(0, 2, 1).contiguous(), \
+            p2.permute(0, 2, 1).contiguous()]
+        return all_pc
+
+
+# CRA-PCN 
 class CRAPCN(nn.Module):
     def __init__(self, ):
         super().__init__()
@@ -422,10 +450,56 @@ class CRAPCN_sn55(nn.Module):
         all_pc = self.decoder(global_f, p0, p_sd, f_sd)
         return all_pc
 
-# testing
-if __name__ == '__main__':
-    model = CRAPCN().cuda()
-    pc = torch.rand(1, 2048, 3).cuda()
-    re = model(pc)
-    for i in re:
-        print(i.shape)
+class CRAPCN_mvp(nn.Module):
+    def __init__(self, ):
+        super().__init__()
+        self.encoder = Encoder()
+        self.seed_generator = SeedGenerator()
+        self.decoder = Decoder_mvp()
+
+    def forward(self, xyz):
+        pp, fp, global_f = self.encoder(xyz.permute(0, 2, 1).contiguous())
+        p_sd, f_sd, p0 = self.seed_generator(global_f, pp, fp, xyz)
+        all_pc = self.decoder(global_f, p0, p_sd, f_sd)
+        return all_pc
+
+# CRA-PCN 
+class CRAPCN_d(nn.Module):
+    def __init__(self, ):
+        super().__init__()
+        self.encoder = Encoder()
+        self.seed_generator = SeedGenerator_Deconv()
+        self.decoder = Decoder()
+
+    def forward(self, xyz):
+        pp, fp, global_f = self.encoder(xyz.permute(0, 2, 1).contiguous())
+        p_sd, f_sd, p0 = self.seed_generator(global_f, pp, fp, xyz)
+        all_pc = self.decoder(global_f, p0, p_sd, f_sd)
+        return all_pc
+
+class CRAPCN_sn55_d(nn.Module):
+    def __init__(self, ):
+        super().__init__()
+        self.encoder = Encoder()
+        self.seed_generator = SeedGenerator_Deconv()
+        self.decoder = Decoder_sn55()
+
+    def forward(self, xyz):
+        pp, fp, global_f = self.encoder(xyz.permute(0, 2, 1).contiguous())
+        p_sd, f_sd, p0 = self.seed_generator(global_f, pp, fp, xyz)
+        all_pc = self.decoder(global_f, p0, p_sd, f_sd)
+        return all_pc
+
+class CRAPCN_mvp_d(nn.Module):
+    def __init__(self, ):
+        super().__init__()
+        self.encoder = Encoder()
+        self.seed_generator = SeedGenerator_Deconv()
+        self.decoder = Decoder_mvp()
+
+    def forward(self, xyz):
+        pp, fp, global_f = self.encoder(xyz.permute(0, 2, 1).contiguous())
+        p_sd, f_sd, p0 = self.seed_generator(global_f, pp, fp, xyz)
+        all_pc = self.decoder(global_f, p0, p_sd, f_sd)
+        return all_pc
+

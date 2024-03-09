@@ -12,16 +12,12 @@ from easydict import EasyDict as edict
 from importlib import import_module
 from pprint import pprint
 from manager import Manager, Manager_shapenet55
-from crapcn import CRAPCN_sn55
+from models.crapcn import CRAPCN_sn55, CRAPCN_sn55_d
 
 TRAIN_NAME = os.path.splitext(os.path.basename(__file__))[0]
 
-# ----------------------------------------------------------------------------------------------------------------------
-#
-#           Arguments 
-#       \******************/
-#
 
+# Arguments 
 parser = argparse.ArgumentParser()
 parser.add_argument('--desc', type=str, default='Training/Testing CRA-PCN', help='description')
 parser.add_argument('--net_model', type=str, default='model', help='Import module.')
@@ -33,12 +29,8 @@ parser.add_argument('--pretrained', type=str, default='', help='Pretrained path 
 parser.add_argument('--mode', type=str, default='median', help='Testing mode [easy, median, hard].')
 args = parser.parse_args()
 
-
+# Configuration for ShapeNet55
 def ShapeNet55Config():
-
-    #######################
-    # Configuration for PCN
-    #######################
 
     __C                                              = edict()
     cfg                                              = __C
@@ -107,11 +99,6 @@ def ShapeNet55Config():
     return cfg
 
 
-# ----------------------------------------------------------------------------------------------------------------------
-#
-#           Main Call
-#       \***************/
-#
 
 def train_net(cfg):
     # Enable the inbuilt cudnn auto-tuner to find the best algorithm to use
@@ -163,16 +150,9 @@ def train_net(cfg):
     #######################
 
 
-    model = CRAPCN_sn55()
+    model = CRAPCN_sn55() # or 'CRAPCN_sn55_d'
     if torch.cuda.is_available():
         model = torch.nn.DataParallel(model).cuda()
-
-    # load existing model
-    if 'WEIGHTS' in cfg.CONST:
-        print('Recovering from %s ...' % (cfg.CONST.WEIGHTS))
-        checkpoint = torch.load(cfg.CONST.WEIGHTS)
-        model.load_state_dict(checkpoint['model'])
-        print('Recover complete. Current epoch = #%d; best metrics = %s.' % (checkpoint['epoch_index'], checkpoint['best_metrics']))
 
 
     ##################
@@ -198,7 +178,6 @@ if __name__ == '__main__':
     set_seed(seed)
     print('cuda available ', torch.cuda.is_available())
 
-    # Init config
     cfg = ShapeNet55Config()
 
     train_net(cfg)
