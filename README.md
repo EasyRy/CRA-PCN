@@ -60,7 +60,7 @@ __C.DATASETS.SHAPENET55.COMPLETE_POINTS_PATH  =  './data/ShapeNet55-34/shapenet_
 Otherwise, you need to download ShapeNet-55/34 dataset from [here](https://github.com/yuxumin/PoinTr/blob/master/DATASET.md), and then unzip it and put it under ./data.
 
 ### MVP dataset
-You can download MVP dataset from this [link](https://drive.google.com/drive/folders/1XxZ4M_dOB3_OG1J6PnpNvrGTie5X9Vk), and put these two .h5 files in MVP folder.
+You can download MVP dataset from this [link](https://mvp-dataset.github.io/), and put these two .h5 files in MVP folder.
 The input & output resolution is 2048.
 
 ❗After data preparation, the overall directory structure should be:
@@ -195,6 +195,6 @@ This file is used to control the training/testing process, where *Manager* is ap
 It is a common phenomenon due to the randomness of farthest point sampling.
 
 
-##[Acknowledgement]
+## [Acknowledgement]
 This repo is heavily based on [SeedFormer](https://github.com/hrzhou2/seedformer), [SnowflakeNet](https://github.com/AllenXiangX/SnowflakeNet), [GRNet](https://github.com/hzxie/GRNet), [VRCNet](https://github.com/paul007pl/VRCNet), and [PoinTr](https://github.com/yuxumin/PoinTr).
 We thank for their excellent works.
