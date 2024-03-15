@@ -174,6 +174,8 @@ python test_mvp.py
 ```
 ## [Some details about training]
 
+### Can't reproduce the results
+Please refer to [here](https://github.com/EasyRy/CRA-PCN/tree/main/models).
 
 ### Training/testing configuration  
 
