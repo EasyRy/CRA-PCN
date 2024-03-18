@@ -172,7 +172,7 @@ Testing
 ```
 python test_mvp.py 
 ```
-## [Some details about training]
+## [Some details about training & testing]
 
 ### Can't reproduce the results
 Please refer to [here](https://github.com/EasyRy/CRA-PCN/tree/main/models).
