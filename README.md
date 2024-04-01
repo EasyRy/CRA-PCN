@@ -4,7 +4,8 @@
 
 ## [CRA-PCN]
 
-This repo contains a PyTorch implementation for **CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24). [**arXiv**](https://arxiv.org/abs/2401.01552)
+This repo contains a PyTorch implementation for **CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers** (AAAI'24). 
+[[**arXiv**]](https://arxiv.org/abs/2401.01552) [[**AAAI**]](https://ojs.aaai.org/index.php/AAAI/article/view/28268)
 
 ## [News]
 **[2024-03-09]**  We add a new seed generator implemented with [Deconvolution](https://github.com/AllenXiangX/SnowflakeNet). 
