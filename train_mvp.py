@@ -156,7 +156,7 @@ def MVPConfig():
     #
     __C.TRAIN                                        = edict()
     __C.TRAIN.BATCH_SIZE                             = 44
-    __C.TRAIN.N_EPOCHS                               = 400
+    __C.TRAIN.N_EPOCHS                               = 200
     __C.TRAIN.SAVE_FREQ                              = 25
     __C.TRAIN.LEARNING_RATE                          = 0.0001
     __C.TRAIN.LR_MILESTONES                          = [50, 100, 150, 200, 250]

@@ -12,6 +12,7 @@ from utils.schedular import GradualWarmupScheduler
 from utils.loss_utils_clamp import get_loss_clamp, get_loss_mvp
 from utils.ply import read_ply, write_ply
 import pointnet_utils.pc_util as pc_util
+from utils.mvp_utils import *
 from PIL import Image
 
 class Manager:
@@ -842,7 +843,7 @@ class Manager_MVP:
         self.train_record('n_itr, cd_pc, cd_p1, cd_p2, cd_p3, partial_matching')
         print('Testing Record:')
         self.test_record('#epoch cdc cd1 cd2 partial_matching | cd3 | #best_epoch best_metrics')
-
+        cd_best  = 1e6
         # Training Start
         for epoch_idx in range(init_epoch + 1, cfg.TRAIN.N_EPOCHS + 1):
 
@@ -912,19 +913,49 @@ class Manager_MVP:
             epoch_end_time = time.time()
 
             # Training record
-            self.train_record(
-                '[Epoch %d/%d] LearningRate = %f EpochTime = %.3f (s) Losses = %s' %
-                (epoch_idx, cfg.TRAIN.N_EPOCHS, learning_rate, epoch_end_time - epoch_start_time, ['%.4f' % l for l in [avg_cdc, avg_cd1, avg_cd2, avg_cd3, avg_partial]]))
 
             # save checkpoint 
-            if epoch_idx % 5 == 0:
+            now_cd = self.validate(cfg, model, val_data_loader)
+
+            if now_cd < cd_best:
+                cd_best = now_cd
                 file_name = 'ckpt-best.pth' 
-                output_path = os.path.join(cfg.DIR.CHECKPOINTS, str(epoch_idx) + file_name)
+                output_path = os.path.join(cfg.DIR.CHECKPOINTS, file_name)
                 torch.save({
                     'epoch_index': epoch_idx,
                     'model': model.state_dict()
                 }, output_path)
-
+            
+            self.train_record(
+                '[Epoch %d/%d] LearningRate = %f EpochTime = %.3f (s) Losses = %s cd_best = %f' %
+                (epoch_idx, cfg.TRAIN.N_EPOCHS, learning_rate, epoch_end_time - epoch_start_time, ['%.4f' % l for l in [avg_cdc, avg_cd1, avg_cd2, avg_cd3, avg_partial]], cd_best))
         # training end
         self.train_record_file.close()
         self.test_record_file.close()
+
+    def validate(self, cfg, model=None, val_data_loader=None):
+
+
+        metrics = ['cd_p', 'cd_t', 'f1']
+        test_loss_meters = {m: AverageValueMeter() for m in metrics}
+        model.eval()
+
+        with torch.no_grad():
+            for data in val_data_loader:
+                label, inputs_cpu, gt_cpu = data
+
+                inputs = inputs_cpu.float().cuda()
+                gt = gt_cpu.float().cuda()
+                
+                output = model(inputs)[-1]
+                cd_p, cd_t, f1 = calc_cd(output, gt, calc_f1=True)
+                result_dict = dict()
+                result_dict['cd_p'] = cd_p
+                result_dict['cd_t'] = cd_t
+                result_dict['f1'] = f1
+
+                for k, v in test_loss_meters.items():
+                    v.update(result_dict[k].mean().item())
+                
+            
+        return test_loss_meters['cd_t'].avg
