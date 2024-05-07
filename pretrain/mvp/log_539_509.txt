@@ -1,0 +1,217 @@
+Loaded compiled 3D CUDA chamfer distance
+cuda available  True
+(62400, 2048, 3)
+(2400, 2048, 3) (62400,)
+(41600, 2048, 3)
+(1600, 2048, 3) (41600,)
+Saving outdir: results/mvp_result/train_mvp_Log_2024_05_05_11_11_52
+{'CONST': {'DEVICE': '0, 1', 'NUM_WORKERS': 8, 'N_INPUT_POINTS': 2048},
+ 'DATASET': {'TEST_DATASET': 'ShapeNet', 'TRAIN_DATASET': 'ShapeNet'},
+ 'DATASETS': {'COMPLETION3D': {'CATEGORY_FILE_PATH': './datasets/Completion3D.json',
+                               'COMPLETE_POINTS_PATH': '/path/to/datasets/Completion3D/%s/gt/%s/%s.h5',
+                               'PARTIAL_POINTS_PATH': '/path/to/datasets/Completion3D/%s/partial/%s/%s.h5'},
+              'SHAPENET': {'CATEGORY_FILE_PATH': './datasets/ShapeNet.json',
+                           'COMPLETE_POINTS_PATH': '../data/PCN/%s/complete/%s/%s.pcd',
+                           'N_POINTS': 2048,
+                           'N_RENDERINGS': 8,
+                           'PARTIAL_POINTS_PATH': '../data/PCN/%s/partial/%s/%s/%02d.pcd'}},
+ 'DIR': {'CHECKPOINTS': 'results/mvp_result/train_mvp_Log_2024_05_05_11_11_52/checkpoints',
+         'LOGS': 'results/mvp_result/train_mvp_Log_2024_05_05_11_11_52',
+         'OUT_PATH': 'results/mvp_result/train_mvp_Log_2024_05_05_11_11_52',
+         'TEST_PATH': 'test/MVP'},
+ 'NETWORK': {'KP_EXTENTS': [0.1, 0.1, 0.05, 0.025],
+             'UPSAMPLE_FACTORS': [2, 2, 1, 8]},
+ 'TEST': {'METRIC_NAME': 'ChamferDistance'},
+ 'TRAIN': {'BATCH_SIZE': 80,
+           'BETAS': [0.9, 0.999],
+           'GAMMA': 0.5,
+           'LEARNING_RATE': 0.0001,
+           'LR_DECAY': 100,
+           'LR_DECAY_STEP': 50,
+           'LR_MILESTONES': [50, 100, 150, 200, 250],
+           'N_EPOCHS': 200,
+           'SAVE_FREQ': 25,
+           'WARMUP_EPOCHS': 20,
+           'WARMUP_STEPS': 200,
+           'WEIGHT_DECAY': 0.001}}
+Training Record:
+n_itr, cd_pc, cd_p1, cd_p2, cd_p3, partial_matching
+Testing Record:
+#epoch cdc cd1 cd2 partial_matching | cd3 | #best_epoch best_metrics
+/home/data6/rongyi/miniconda3/envs/pcc/lib/python3.6/site-packages/torch/optim/lr_scheduler.py:134: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+[Epoch 1/200] LearningRate = 0.000005 EpochTime = 680.886 (s) Losses = ['87.2187', '33.1993', '27.5556', '27.5556', '87.2187'] cd_best = 0.002925
+[Epoch 2/200] LearningRate = 0.000010 EpochTime = 651.488 (s) Losses = ['48.0861', '27.8051', '20.6305', '20.6305', '48.0861'] cd_best = 0.001647
+[Epoch 3/200] LearningRate = 0.000015 EpochTime = 650.890 (s) Losses = ['37.9517', '24.8703', '17.7156', '17.7156', '37.9517'] cd_best = 0.001270
+[Epoch 4/200] LearningRate = 0.000020 EpochTime = 652.655 (s) Losses = ['35.4801', '23.6644', '16.5472', '16.5472', '35.4801'] cd_best = 0.001069
+[Epoch 5/200] LearningRate = 0.000025 EpochTime = 650.329 (s) Losses = ['33.9478', '22.9183', '15.8385', '15.8385', '33.9478'] cd_best = 0.000965
+[Epoch 6/200] LearningRate = 0.000030 EpochTime = 650.547 (s) Losses = ['32.5941', '22.2760', '15.2021', '15.2021', '32.5941'] cd_best = 0.000863
+[Epoch 7/200] LearningRate = 0.000035 EpochTime = 651.153 (s) Losses = ['31.5841', '21.7985', '14.7544', '14.7544', '31.5841'] cd_best = 0.000794
+[Epoch 8/200] LearningRate = 0.000040 EpochTime = 659.321 (s) Losses = ['30.8209', '21.4326', '14.3839', '14.3839', '30.8209'] cd_best = 0.000776
+[Epoch 9/200] LearningRate = 0.000045 EpochTime = 650.797 (s) Losses = ['30.2864', '21.1818', '14.1295', '14.1295', '30.2864'] cd_best = 0.000757
+[Epoch 10/200] LearningRate = 0.000050 EpochTime = 650.558 (s) Losses = ['29.8595', '20.9806', '13.9012', '13.9012', '29.8595'] cd_best = 0.000753
+[Epoch 11/200] LearningRate = 0.000055 EpochTime = 653.076 (s) Losses = ['29.4978', '20.8200', '13.7209', '13.7209', '29.4978'] cd_best = 0.000704
+[Epoch 12/200] LearningRate = 0.000060 EpochTime = 650.378 (s) Losses = ['29.1571', '20.6725', '13.5524', '13.5524', '29.1571'] cd_best = 0.000686
+[Epoch 13/200] LearningRate = 0.000065 EpochTime = 650.481 (s) Losses = ['28.9260', '20.5666', '13.4311', '13.4311', '28.9260'] cd_best = 0.000686
+[Epoch 14/200] LearningRate = 0.000070 EpochTime = 650.385 (s) Losses = ['28.7491', '20.4731', '13.3236', '13.3236', '28.7491'] cd_best = 0.000674
+[Epoch 15/200] LearningRate = 0.000075 EpochTime = 652.517 (s) Losses = ['28.5941', '20.3877', '13.2160', '13.2160', '28.5941'] cd_best = 0.000674
+[Epoch 16/200] LearningRate = 0.000080 EpochTime = 648.994 (s) Losses = ['28.4117', '20.2912', '13.1086', '13.1086', '28.4117'] cd_best = 0.000646
+[Epoch 17/200] LearningRate = 0.000085 EpochTime = 646.392 (s) Losses = ['28.2508', '20.2126', '13.0202', '13.0202', '28.2508'] cd_best = 0.000636
+[Epoch 18/200] LearningRate = 0.000090 EpochTime = 651.121 (s) Losses = ['28.0956', '20.1313', '12.9258', '12.9258', '28.0956'] cd_best = 0.000636
+[Epoch 19/200] LearningRate = 0.000095 EpochTime = 649.666 (s) Losses = ['27.9761', '20.0653', '12.8544', '12.8544', '27.9761'] cd_best = 0.000627
+[Epoch 20/200] LearningRate = 0.000100 EpochTime = 650.459 (s) Losses = ['27.8816', '20.0013', '12.7894', '12.7894', '27.8816'] cd_best = 0.000627
+[Epoch 21/200] LearningRate = 0.000100 EpochTime = 658.981 (s) Losses = ['27.7063', '19.9143', '12.6889', '12.6889', '27.7063'] cd_best = 0.000617
+[Epoch 22/200] LearningRate = 0.000098 EpochTime = 655.429 (s) Losses = ['27.5635', '19.8317', '12.6105', '12.6105', '27.5635'] cd_best = 0.000617
+[Epoch 23/200] LearningRate = 0.000095 EpochTime = 643.434 (s) Losses = ['27.3969', '19.7517', '12.5269', '12.5269', '27.3969'] cd_best = 0.000617
+[Epoch 24/200] LearningRate = 0.000093 EpochTime = 644.984 (s) Losses = ['27.2996', '19.6838', '12.4595', '12.4595', '27.2996'] cd_best = 0.000598
+[Epoch 25/200] LearningRate = 0.000091 EpochTime = 648.193 (s) Losses = ['27.2212', '19.6216', '12.4031', '12.4031', '27.2212'] cd_best = 0.000586
+[Epoch 26/200] LearningRate = 0.000089 EpochTime = 646.102 (s) Losses = ['27.0449', '19.5491', '12.3267', '12.3267', '27.0449'] cd_best = 0.000585
+[Epoch 27/200] LearningRate = 0.000087 EpochTime = 638.963 (s) Losses = ['26.9728', '19.4995', '12.2823', '12.2823', '26.9728'] cd_best = 0.000585
+[Epoch 28/200] LearningRate = 0.000085 EpochTime = 638.058 (s) Losses = ['26.8853', '19.4443', '12.2304', '12.2304', '26.8853'] cd_best = 0.000585
+[Epoch 29/200] LearningRate = 0.000083 EpochTime = 639.793 (s) Losses = ['26.7732', '19.3871', '12.1727', '12.1727', '26.7732'] cd_best = 0.000579
+[Epoch 30/200] LearningRate = 0.000081 EpochTime = 639.545 (s) Losses = ['26.7121', '19.3415', '12.1274', '12.1274', '26.7121'] cd_best = 0.000572
+[Epoch 31/200] LearningRate = 0.000079 EpochTime = 638.591 (s) Losses = ['26.6313', '19.2976', '12.0863', '12.0863', '26.6313'] cd_best = 0.000565
+[Epoch 32/200] LearningRate = 0.000078 EpochTime = 640.590 (s) Losses = ['26.5712', '19.2573', '12.0489', '12.0489', '26.5712'] cd_best = 0.000565
+[Epoch 33/200] LearningRate = 0.000076 EpochTime = 637.131 (s) Losses = ['26.4954', '19.2108', '12.0060', '12.0060', '26.4954'] cd_best = 0.000562
+[Epoch 34/200] LearningRate = 0.000074 EpochTime = 636.598 (s) Losses = ['26.4382', '19.1750', '11.9714', '11.9714', '26.4382'] cd_best = 0.000562
+[Epoch 35/200] LearningRate = 0.000072 EpochTime = 639.627 (s) Losses = ['26.3833', '19.1350', '11.9324', '11.9324', '26.3833'] cd_best = 0.000562
+[Epoch 36/200] LearningRate = 0.000071 EpochTime = 640.975 (s) Losses = ['26.3194', '19.0990', '11.8978', '11.8978', '26.3194'] cd_best = 0.000562
+[Epoch 37/200] LearningRate = 0.000069 EpochTime = 639.824 (s) Losses = ['26.2619', '19.0685', '11.8680', '11.8680', '26.2619'] cd_best = 0.000562
+[Epoch 38/200] LearningRate = 0.000068 EpochTime = 639.198 (s) Losses = ['26.2122', '19.0361', '11.8342', '11.8342', '26.2122'] cd_best = 0.000556
+[Epoch 39/200] LearningRate = 0.000066 EpochTime = 643.513 (s) Losses = ['26.1691', '19.0039', '11.8052', '11.8052', '26.1691'] cd_best = 0.000556
+[Epoch 40/200] LearningRate = 0.000065 EpochTime = 640.137 (s) Losses = ['26.1284', '18.9745', '11.7766', '11.7766', '26.1284'] cd_best = 0.000556
+[Epoch 41/200] LearningRate = 0.000063 EpochTime = 641.267 (s) Losses = ['26.0831', '18.9503', '11.7538', '11.7538', '26.0831'] cd_best = 0.000551
+[Epoch 42/200] LearningRate = 0.000062 EpochTime = 638.015 (s) Losses = ['26.0390', '18.9192', '11.7180', '11.7180', '26.0390'] cd_best = 0.000551
+[Epoch 43/200] LearningRate = 0.000060 EpochTime = 638.540 (s) Losses = ['25.9880', '18.8836', '11.6835', '11.6835', '25.9880'] cd_best = 0.000551
+[Epoch 44/200] LearningRate = 0.000059 EpochTime = 642.833 (s) Losses = ['25.9563', '18.8666', '11.6676', '11.6676', '25.9563'] cd_best = 0.000551
+[Epoch 45/200] LearningRate = 0.000058 EpochTime = 640.194 (s) Losses = ['25.9204', '18.8427', '11.6430', '11.6430', '25.9204'] cd_best = 0.000546
+[Epoch 46/200] LearningRate = 0.000056 EpochTime = 639.345 (s) Losses = ['25.8905', '18.8199', '11.6157', '11.6157', '25.8905'] cd_best = 0.000546
+[Epoch 47/200] LearningRate = 0.000055 EpochTime = 639.742 (s) Losses = ['25.8502', '18.7936', '11.5895', '11.5895', '25.8502'] cd_best = 0.000546
+[Epoch 48/200] LearningRate = 0.000054 EpochTime = 639.908 (s) Losses = ['25.8132', '18.7728', '11.5690', '11.5690', '25.8132'] cd_best = 0.000546
+[Epoch 49/200] LearningRate = 0.000052 EpochTime = 639.117 (s) Losses = ['25.7831', '18.7466', '11.5434', '11.5434', '25.7831'] cd_best = 0.000546
+[Epoch 50/200] LearningRate = 0.000051 EpochTime = 638.175 (s) Losses = ['25.7603', '18.7321', '11.5269', '11.5269', '25.7603'] cd_best = 0.000546
+[Epoch 51/200] LearningRate = 0.000050 EpochTime = 647.420 (s) Losses = ['25.7209', '18.7126', '11.5090', '11.5090', '25.7209'] cd_best = 0.000546
+[Epoch 52/200] LearningRate = 0.000049 EpochTime = 652.030 (s) Losses = ['25.7046', '18.6941', '11.4878', '11.4878', '25.7046'] cd_best = 0.000546
+[Epoch 53/200] LearningRate = 0.000048 EpochTime = 654.607 (s) Losses = ['25.6657', '18.6764', '11.4695', '11.4695', '25.6657'] cd_best = 0.000546
+[Epoch 54/200] LearningRate = 0.000047 EpochTime = 657.106 (s) Losses = ['25.6421', '18.6603', '11.4507', '11.4507', '25.6421'] cd_best = 0.000546
+[Epoch 55/200] LearningRate = 0.000046 EpochTime = 640.988 (s) Losses = ['25.6224', '18.6422', '11.4345', '11.4345', '25.6224'] cd_best = 0.000539
+[Epoch 56/200] LearningRate = 0.000045 EpochTime = 642.927 (s) Losses = ['25.5936', '18.6232', '11.4123', '11.4123', '25.5936'] cd_best = 0.000539
+[Epoch 57/200] LearningRate = 0.000044 EpochTime = 640.667 (s) Losses = ['25.5662', '18.6074', '11.4000', '11.4000', '25.5662'] cd_best = 0.000539
+[Epoch 58/200] LearningRate = 0.000043 EpochTime = 640.636 (s) Losses = ['25.5418', '18.5910', '11.3794', '11.3794', '25.5418'] cd_best = 0.000539
+[Epoch 59/200] LearningRate = 0.000042 EpochTime = 641.485 (s) Losses = ['25.5223', '18.5776', '11.3623', '11.3623', '25.5223'] cd_best = 0.000539
+[Epoch 60/200] LearningRate = 0.000041 EpochTime = 638.560 (s) Losses = ['25.5066', '18.5607', '11.3464', '11.3464', '25.5066'] cd_best = 0.000539
+[Epoch 61/200] LearningRate = 0.000040 EpochTime = 642.258 (s) Losses = ['25.4835', '18.5466', '11.3306', '11.3306', '25.4835'] cd_best = 0.000539
+[Epoch 62/200] LearningRate = 0.000039 EpochTime = 639.301 (s) Losses = ['25.4607', '18.5344', '11.3177', '11.3177', '25.4607'] cd_best = 0.000539
+[Epoch 63/200] LearningRate = 0.000038 EpochTime = 640.476 (s) Losses = ['25.4293', '18.5162', '11.2996', '11.2996', '25.4293'] cd_best = 0.000539
+[Epoch 64/200] LearningRate = 0.000037 EpochTime = 641.371 (s) Losses = ['25.4234', '18.5081', '11.2912', '11.2912', '25.4234'] cd_best = 0.000539
+[Epoch 65/200] LearningRate = 0.000036 EpochTime = 642.321 (s) Losses = ['25.4072', '18.4928', '11.2742', '11.2742', '25.4072'] cd_best = 0.000539
+[Epoch 66/200] LearningRate = 0.000035 EpochTime = 643.505 (s) Losses = ['25.3887', '18.4803', '11.2608', '11.2608', '25.3887'] cd_best = 0.000539
+[Epoch 67/200] LearningRate = 0.000035 EpochTime = 650.801 (s) Losses = ['25.3714', '18.4695', '11.2479', '11.2479', '25.3714'] cd_best = 0.000539
+[Epoch 68/200] LearningRate = 0.000034 EpochTime = 653.490 (s) Losses = ['25.3540', '18.4560', '11.2332', '11.2332', '25.3540'] cd_best = 0.000539
+[Epoch 69/200] LearningRate = 0.000033 EpochTime = 650.010 (s) Losses = ['25.3375', '18.4455', '11.2223', '11.2223', '25.3375'] cd_best = 0.000539
+[Epoch 70/200] LearningRate = 0.000032 EpochTime = 652.467 (s) Losses = ['25.3302', '18.4409', '11.2149', '11.2149', '25.3302'] cd_best = 0.000539
+[Epoch 71/200] LearningRate = 0.000032 EpochTime = 650.544 (s) Losses = ['25.3026', '18.4245', '11.1970', '11.1970', '25.3026'] cd_best = 0.000539
+[Epoch 72/200] LearningRate = 0.000031 EpochTime = 652.833 (s) Losses = ['25.2912', '18.4143', '11.1868', '11.1868', '25.2912'] cd_best = 0.000539
+[Epoch 73/200] LearningRate = 0.000030 EpochTime = 653.117 (s) Losses = ['25.2724', '18.4017', '11.1746', '11.1746', '25.2724'] cd_best = 0.000539
+[Epoch 74/200] LearningRate = 0.000030 EpochTime = 656.351 (s) Losses = ['25.2605', '18.3924', '11.1645', '11.1645', '25.2605'] cd_best = 0.000539
+[Epoch 75/200] LearningRate = 0.000029 EpochTime = 652.614 (s) Losses = ['25.2522', '18.3855', '11.1549', '11.1549', '25.2522'] cd_best = 0.000539
+[Epoch 76/200] LearningRate = 0.000028 EpochTime = 651.788 (s) Losses = ['25.2353', '18.3744', '11.1447', '11.1447', '25.2353'] cd_best = 0.000539
+[Epoch 77/200] LearningRate = 0.000028 EpochTime = 649.017 (s) Losses = ['25.2228', '18.3639', '11.1332', '11.1332', '25.2228'] cd_best = 0.000539
+[Epoch 78/200] LearningRate = 0.000027 EpochTime = 651.567 (s) Losses = ['25.2122', '18.3566', '11.1250', '11.1250', '25.2122'] cd_best = 0.000539
+[Epoch 79/200] LearningRate = 0.000026 EpochTime = 651.384 (s) Losses = ['25.2025', '18.3451', '11.1131', '11.1131', '25.2025'] cd_best = 0.000539
+[Epoch 80/200] LearningRate = 0.000026 EpochTime = 655.219 (s) Losses = ['25.1852', '18.3393', '11.1048', '11.1048', '25.1852'] cd_best = 0.000539
+[Epoch 81/200] LearningRate = 0.000025 EpochTime = 662.105 (s) Losses = ['25.1737', '18.3317', '11.0958', '11.0958', '25.1737'] cd_best = 0.000539
+[Epoch 82/200] LearningRate = 0.000025 EpochTime = 661.299 (s) Losses = ['25.1653', '18.3213', '11.0877', '11.0877', '25.1653'] cd_best = 0.000539
+[Epoch 83/200] LearningRate = 0.000024 EpochTime = 667.568 (s) Losses = ['25.1531', '18.3130', '11.0755', '11.0755', '25.1531'] cd_best = 0.000539
+[Epoch 84/200] LearningRate = 0.000023 EpochTime = 660.580 (s) Losses = ['25.1410', '18.3049', '11.0666', '11.0666', '25.1410'] cd_best = 0.000539
+[Epoch 85/200] LearningRate = 0.000023 EpochTime = 640.140 (s) Losses = ['25.1318', '18.2982', '11.0609', '11.0609', '25.1318'] cd_best = 0.000539
+[Epoch 86/200] LearningRate = 0.000022 EpochTime = 643.188 (s) Losses = ['25.1236', '18.2929', '11.0530', '11.0530', '25.1236'] cd_best = 0.000539
+[Epoch 87/200] LearningRate = 0.000022 EpochTime = 640.836 (s) Losses = ['25.1132', '18.2849', '11.0467', '11.0467', '25.1132'] cd_best = 0.000539
+[Epoch 88/200] LearningRate = 0.000021 EpochTime = 639.039 (s) Losses = ['25.1066', '18.2798', '11.0376', '11.0376', '25.1066'] cd_best = 0.000539
+[Epoch 89/200] LearningRate = 0.000021 EpochTime = 639.591 (s) Losses = ['25.0943', '18.2705', '11.0289', '11.0289', '25.0943'] cd_best = 0.000539
+[Epoch 90/200] LearningRate = 0.000020 EpochTime = 642.989 (s) Losses = ['25.0833', '18.2623', '11.0215', '11.0215', '25.0833'] cd_best = 0.000539
+[Epoch 91/200] LearningRate = 0.000020 EpochTime = 644.255 (s) Losses = ['25.0784', '18.2585', '11.0137', '11.0137', '25.0784'] cd_best = 0.000539
+[Epoch 92/200] LearningRate = 0.000019 EpochTime = 640.010 (s) Losses = ['25.0637', '18.2501', '11.0061', '11.0061', '25.0637'] cd_best = 0.000539
+[Epoch 93/200] LearningRate = 0.000019 EpochTime = 640.132 (s) Losses = ['25.0600', '18.2431', '10.9973', '10.9973', '25.0600'] cd_best = 0.000539
+[Epoch 94/200] LearningRate = 0.000019 EpochTime = 642.223 (s) Losses = ['25.0460', '18.2362', '10.9912', '10.9912', '25.0460'] cd_best = 0.000539
+[Epoch 95/200] LearningRate = 0.000018 EpochTime = 640.871 (s) Losses = ['25.0386', '18.2320', '10.9831', '10.9831', '25.0386'] cd_best = 0.000539
+[Epoch 96/200] LearningRate = 0.000018 EpochTime = 639.726 (s) Losses = ['25.0300', '18.2245', '10.9777', '10.9777', '25.0300'] cd_best = 0.000539
+[Epoch 97/200] LearningRate = 0.000017 EpochTime = 640.604 (s) Losses = ['25.0283', '18.2236', '10.9729', '10.9729', '25.0283'] cd_best = 0.000539
+[Epoch 98/200] LearningRate = 0.000017 EpochTime = 639.494 (s) Losses = ['25.0174', '18.2157', '10.9650', '10.9650', '25.0174'] cd_best = 0.000539
+[Epoch 99/200] LearningRate = 0.000017 EpochTime = 644.765 (s) Losses = ['25.0079', '18.2100', '10.9587', '10.9587', '25.0079'] cd_best = 0.000539
+[Epoch 100/200] LearningRate = 0.000016 EpochTime = 640.920 (s) Losses = ['25.0029', '18.2035', '10.9537', '10.9537', '25.0029'] cd_best = 0.000539
+[Epoch 101/200] LearningRate = 0.000016 EpochTime = 642.186 (s) Losses = ['24.9977', '18.2011', '10.9506', '10.9506', '24.9977'] cd_best = 0.000539
+[Epoch 102/200] LearningRate = 0.000015 EpochTime = 642.112 (s) Losses = ['24.9887', '18.1959', '10.9422', '10.9422', '24.9887'] cd_best = 0.000539
+[Epoch 103/200] LearningRate = 0.000015 EpochTime = 641.265 (s) Losses = ['24.9837', '18.1897', '10.9382', '10.9382', '24.9837'] cd_best = 0.000539
+[Epoch 104/200] LearningRate = 0.000015 EpochTime = 641.130 (s) Losses = ['24.9755', '18.1829', '10.9317', '10.9317', '24.9755'] cd_best = 0.000539
+[Epoch 105/200] LearningRate = 0.000014 EpochTime = 642.122 (s) Losses = ['24.9691', '18.1815', '10.9278', '10.9278', '24.9691'] cd_best = 0.000539
+[Epoch 106/200] LearningRate = 0.000014 EpochTime = 640.987 (s) Losses = ['24.9612', '18.1738', '10.9197', '10.9197', '24.9612'] cd_best = 0.000539
+[Epoch 107/200] LearningRate = 0.000014 EpochTime = 640.242 (s) Losses = ['24.9556', '18.1700', '10.9138', '10.9138', '24.9556'] cd_best = 0.000539
+[Epoch 108/200] LearningRate = 0.000013 EpochTime = 645.500 (s) Losses = ['24.9498', '18.1646', '10.9099', '10.9099', '24.9498'] cd_best = 0.000539
+[Epoch 109/200] LearningRate = 0.000013 EpochTime = 641.760 (s) Losses = ['24.9463', '18.1611', '10.9056', '10.9056', '24.9463'] cd_best = 0.000539
+[Epoch 110/200] LearningRate = 0.000013 EpochTime = 643.826 (s) Losses = ['24.9392', '18.1575', '10.9023', '10.9023', '24.9392'] cd_best = 0.000539
+[Epoch 111/200] LearningRate = 0.000013 EpochTime = 651.403 (s) Losses = ['24.9325', '18.1540', '10.8966', '10.8966', '24.9325'] cd_best = 0.000539
+[Epoch 112/200] LearningRate = 0.000012 EpochTime = 650.405 (s) Losses = ['24.9259', '18.1474', '10.8892', '10.8892', '24.9259'] cd_best = 0.000539
+[Epoch 113/200] LearningRate = 0.000012 EpochTime = 651.894 (s) Losses = ['24.9230', '18.1471', '10.8882', '10.8882', '24.9230'] cd_best = 0.000539
+[Epoch 114/200] LearningRate = 0.000012 EpochTime = 650.811 (s) Losses = ['24.9161', '18.1399', '10.8802', '10.8802', '24.9161'] cd_best = 0.000539
+[Epoch 115/200] LearningRate = 0.000011 EpochTime = 642.113 (s) Losses = ['24.9121', '18.1354', '10.8786', '10.8786', '24.9121'] cd_best = 0.000539
+[Epoch 116/200] LearningRate = 0.000011 EpochTime = 643.034 (s) Losses = ['24.9045', '18.1331', '10.8718', '10.8718', '24.9045'] cd_best = 0.000539
+[Epoch 117/200] LearningRate = 0.000011 EpochTime = 642.282 (s) Losses = ['24.9023', '18.1307', '10.8712', '10.8712', '24.9023'] cd_best = 0.000539
+[Epoch 118/200] LearningRate = 0.000011 EpochTime = 642.771 (s) Losses = ['24.8952', '18.1253', '10.8651', '10.8651', '24.8952'] cd_best = 0.000539
+[Epoch 119/200] LearningRate = 0.000010 EpochTime = 641.462 (s) Losses = ['24.8934', '18.1221', '10.8599', '10.8599', '24.8934'] cd_best = 0.000539
+[Epoch 120/200] LearningRate = 0.000010 EpochTime = 643.603 (s) Losses = ['24.8849', '18.1170', '10.8551', '10.8551', '24.8849'] cd_best = 0.000539
+[Epoch 121/200] LearningRate = 0.000010 EpochTime = 642.320 (s) Losses = ['24.8842', '18.1176', '10.8562', '10.8562', '24.8842'] cd_best = 0.000539
+[Epoch 122/200] LearningRate = 0.000010 EpochTime = 640.045 (s) Losses = ['24.8769', '18.1117', '10.8479', '10.8479', '24.8769'] cd_best = 0.000539
+[Epoch 123/200] LearningRate = 0.000010 EpochTime = 639.542 (s) Losses = ['24.8724', '18.1079', '10.8447', '10.8447', '24.8724'] cd_best = 0.000539
+[Epoch 124/200] LearningRate = 0.000009 EpochTime = 639.780 (s) Losses = ['24.8688', '18.1062', '10.8404', '10.8404', '24.8688'] cd_best = 0.000539
+[Epoch 125/200] LearningRate = 0.000009 EpochTime = 645.027 (s) Losses = ['24.8652', '18.1033', '10.8387', '10.8387', '24.8652'] cd_best = 0.000539
+[Epoch 126/200] LearningRate = 0.000009 EpochTime = 640.270 (s) Losses = ['24.8626', '18.1004', '10.8345', '10.8345', '24.8626'] cd_best = 0.000539
+[Epoch 127/200] LearningRate = 0.000009 EpochTime = 642.875 (s) Losses = ['24.8596', '18.0976', '10.8324', '10.8324', '24.8596'] cd_best = 0.000539
+[Epoch 128/200] LearningRate = 0.000009 EpochTime = 642.520 (s) Losses = ['24.8562', '18.0936', '10.8285', '10.8285', '24.8562'] cd_best = 0.000539
+[Epoch 129/200] LearningRate = 0.000008 EpochTime = 638.541 (s) Losses = ['24.8494', '18.0908', '10.8240', '10.8240', '24.8494'] cd_best = 0.000539
+[Epoch 130/200] LearningRate = 0.000008 EpochTime = 640.779 (s) Losses = ['24.8458', '18.0871', '10.8212', '10.8212', '24.8458'] cd_best = 0.000539
+[Epoch 131/200] LearningRate = 0.000008 EpochTime = 641.427 (s) Losses = ['24.8438', '18.0834', '10.8184', '10.8184', '24.8438'] cd_best = 0.000539
+[Epoch 132/200] LearningRate = 0.000008 EpochTime = 641.235 (s) Losses = ['24.8403', '18.0820', '10.8155', '10.8155', '24.8403'] cd_best = 0.000539
+[Epoch 133/200] LearningRate = 0.000008 EpochTime = 641.939 (s) Losses = ['24.8350', '18.0794', '10.8124', '10.8124', '24.8350'] cd_best = 0.000539
+[Epoch 134/200] LearningRate = 0.000007 EpochTime = 642.405 (s) Losses = ['24.8310', '18.0771', '10.8092', '10.8092', '24.8310'] cd_best = 0.000539
+[Epoch 135/200] LearningRate = 0.000007 EpochTime = 639.752 (s) Losses = ['24.8272', '18.0715', '10.8058', '10.8058', '24.8272'] cd_best = 0.000539
+[Epoch 136/200] LearningRate = 0.000007 EpochTime = 643.229 (s) Losses = ['24.8241', '18.0716', '10.8020', '10.8020', '24.8241'] cd_best = 0.000539
+[Epoch 137/200] LearningRate = 0.000007 EpochTime = 641.633 (s) Losses = ['24.8231', '18.0708', '10.8025', '10.8025', '24.8231'] cd_best = 0.000539
+[Epoch 138/200] LearningRate = 0.000007 EpochTime = 641.985 (s) Losses = ['24.8180', '18.0682', '10.7987', '10.7987', '24.8180'] cd_best = 0.000539
+[Epoch 139/200] LearningRate = 0.000007 EpochTime = 649.984 (s) Losses = ['24.8167', '18.0640', '10.7954', '10.7954', '24.8167'] cd_best = 0.000539
+[Epoch 140/200] LearningRate = 0.000006 EpochTime = 651.318 (s) Losses = ['24.8130', '18.0642', '10.7941', '10.7941', '24.8130'] cd_best = 0.000539
+[Epoch 141/200] LearningRate = 0.000006 EpochTime = 653.571 (s) Losses = ['24.8107', '18.0622', '10.7930', '10.7930', '24.8107'] cd_best = 0.000539
+[Epoch 142/200] LearningRate = 0.000006 EpochTime = 657.040 (s) Losses = ['24.8059', '18.0586', '10.7887', '10.7887', '24.8059'] cd_best = 0.000539
+[Epoch 143/200] LearningRate = 0.000006 EpochTime = 642.024 (s) Losses = ['24.8022', '18.0558', '10.7848', '10.7848', '24.8022'] cd_best = 0.000539
+[Epoch 144/200] LearningRate = 0.000006 EpochTime = 641.868 (s) Losses = ['24.8043', '18.0547', '10.7840', '10.7840', '24.8043'] cd_best = 0.000539
+[Epoch 145/200] LearningRate = 0.000006 EpochTime = 641.340 (s) Losses = ['24.8003', '18.0525', '10.7821', '10.7821', '24.8003'] cd_best = 0.000539
+[Epoch 146/200] LearningRate = 0.000006 EpochTime = 638.722 (s) Losses = ['24.7958', '18.0499', '10.7804', '10.7804', '24.7958'] cd_best = 0.000539
+[Epoch 147/200] LearningRate = 0.000005 EpochTime = 639.397 (s) Losses = ['24.7933', '18.0476', '10.7763', '10.7763', '24.7933'] cd_best = 0.000539
+[Epoch 148/200] LearningRate = 0.000005 EpochTime = 638.770 (s) Losses = ['24.7923', '18.0474', '10.7758', '10.7758', '24.7923'] cd_best = 0.000539
+[Epoch 149/200] LearningRate = 0.000005 EpochTime = 639.711 (s) Losses = ['24.7906', '18.0454', '10.7739', '10.7739', '24.7906'] cd_best = 0.000539
+[Epoch 150/200] LearningRate = 0.000005 EpochTime = 638.672 (s) Losses = ['24.7855', '18.0427', '10.7712', '10.7712', '24.7855'] cd_best = 0.000539
+[Epoch 151/200] LearningRate = 0.000005 EpochTime = 642.293 (s) Losses = ['24.7851', '18.0409', '10.7684', '10.7684', '24.7851'] cd_best = 0.000539
+[Epoch 152/200] LearningRate = 0.000005 EpochTime = 640.294 (s) Losses = ['24.7822', '18.0407', '10.7663', '10.7663', '24.7822'] cd_best = 0.000539
+[Epoch 153/200] LearningRate = 0.000005 EpochTime = 640.947 (s) Losses = ['24.7783', '18.0368', '10.7643', '10.7643', '24.7783'] cd_best = 0.000539
+[Epoch 154/200] LearningRate = 0.000005 EpochTime = 639.145 (s) Losses = ['24.7773', '18.0341', '10.7625', '10.7625', '24.7773'] cd_best = 0.000539
+[Epoch 155/200] LearningRate = 0.000005 EpochTime = 640.407 (s) Losses = ['24.7730', '18.0321', '10.7598', '10.7598', '24.7730'] cd_best = 0.000539
+[Epoch 156/200] LearningRate = 0.000004 EpochTime = 640.024 (s) Losses = ['24.7723', '18.0316', '10.7590', '10.7590', '24.7723'] cd_best = 0.000539
+[Epoch 157/200] LearningRate = 0.000004 EpochTime = 638.989 (s) Losses = ['24.7714', '18.0316', '10.7571', '10.7571', '24.7714'] cd_best = 0.000539
+[Epoch 158/200] LearningRate = 0.000004 EpochTime = 642.203 (s) Losses = ['24.7703', '18.0298', '10.7568', '10.7568', '24.7703'] cd_best = 0.000539
+[Epoch 159/200] LearningRate = 0.000004 EpochTime = 641.378 (s) Losses = ['24.7668', '18.0286', '10.7544', '10.7544', '24.7668'] cd_best = 0.000539
+[Epoch 160/200] LearningRate = 0.000004 EpochTime = 641.261 (s) Losses = ['24.7644', '18.0261', '10.7513', '10.7513', '24.7644'] cd_best = 0.000539
+[Epoch 161/200] LearningRate = 0.000004 EpochTime = 641.471 (s) Losses = ['24.7636', '18.0247', '10.7502', '10.7502', '24.7636'] cd_best = 0.000539
+[Epoch 162/200] LearningRate = 0.000004 EpochTime = 637.405 (s) Losses = ['24.7624', '18.0244', '10.7489', '10.7489', '24.7624'] cd_best = 0.000539
+[Epoch 163/200] LearningRate = 0.000004 EpochTime = 639.351 (s) Losses = ['24.7599', '18.0221', '10.7477', '10.7477', '24.7599'] cd_best = 0.000539
+[Epoch 164/200] LearningRate = 0.000004 EpochTime = 639.476 (s) Losses = ['24.7584', '18.0208', '10.7452', '10.7452', '24.7584'] cd_best = 0.000539
+[Epoch 165/200] LearningRate = 0.000004 EpochTime = 639.539 (s) Losses = ['24.7554', '18.0186', '10.7441', '10.7441', '24.7554'] cd_best = 0.000539
+[Epoch 166/200] LearningRate = 0.000004 EpochTime = 641.458 (s) Losses = ['24.7548', '18.0179', '10.7431', '10.7431', '24.7548'] cd_best = 0.000539
+[Epoch 167/200] LearningRate = 0.000003 EpochTime = 642.330 (s) Losses = ['24.7526', '18.0173', '10.7420', '10.7420', '24.7526'] cd_best = 0.000539
+[Epoch 168/200] LearningRate = 0.000003 EpochTime = 649.431 (s) Losses = ['24.7518', '18.0159', '10.7401', '10.7401', '24.7518'] cd_best = 0.000539
+[Epoch 169/200] LearningRate = 0.000003 EpochTime = 650.036 (s) Losses = ['24.7486', '18.0136', '10.7386', '10.7386', '24.7486'] cd_best = 0.000539
+[Epoch 170/200] LearningRate = 0.000003 EpochTime = 655.766 (s) Losses = ['24.7487', '18.0144', '10.7383', '10.7383', '24.7487'] cd_best = 0.000539
+[Epoch 171/200] LearningRate = 0.000003 EpochTime = 651.422 (s) Losses = ['24.7447', '18.0120', '10.7360', '10.7360', '24.7447'] cd_best = 0.000539
+[Epoch 172/200] LearningRate = 0.000003 EpochTime = 643.918 (s) Losses = ['24.7461', '18.0120', '10.7356', '10.7356', '24.7461'] cd_best = 0.000539
+[Epoch 173/200] LearningRate = 0.000003 EpochTime = 644.628 (s) Losses = ['24.7426', '18.0088', '10.7318', '10.7318', '24.7426'] cd_best = 0.000539
+[Epoch 174/200] LearningRate = 0.000003 EpochTime = 643.947 (s) Losses = ['24.7401', '18.0071', '10.7317', '10.7317', '24.7401'] cd_best = 0.000539
+[Epoch 175/200] LearningRate = 0.000003 EpochTime = 643.782 (s) Losses = ['24.7419', '18.0087', '10.7319', '10.7319', '24.7419'] cd_best = 0.000539
