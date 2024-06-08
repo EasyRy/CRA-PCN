@@ -1,4 +1,6 @@
-# CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers
+<div align='center'>
+<h1>(AAAI'24) CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers </h1>
+</div>
 
 ![example](./vis.png) 
 
