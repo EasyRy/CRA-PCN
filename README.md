@@ -203,3 +203,16 @@ It is a common phenomenon due to the randomness of farthest point sampling.
 ## [Acknowledgement]
 This repo is heavily based on [SeedFormer](https://github.com/hrzhou2/seedformer), [SnowflakeNet](https://github.com/AllenXiangX/SnowflakeNet), [GRNet](https://github.com/hzxie/GRNet), [VRCNet](https://github.com/paul007pl/VRCNet), and [PoinTr](https://github.com/yuxumin/PoinTr).
 We thank for their excellent works.
+
+## [Citation]
+```
+@inproceedings{wang2024pointattn,
+  title={CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers},
+  author={Rong, Yi and Zhou, Haoran and Yuan, Lixin and Mei, Cheng and Wang, Jiahao and Lu, Tong},
+  booktitle={Proceedings of the AAAI Conference on artificial intelligence},
+  volume={38},
+  number={5},
+  pages={4676-4685},
+  year={2024}
+}
+```
