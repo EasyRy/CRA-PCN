@@ -206,13 +206,13 @@ We thank for their excellent works.
 
 ## [Citation]
 ```
-@inproceedings{crapcn,
-  title={CRA-PCN: Point Cloud Completion with Intra- and Inter-level Cross-Resolution Transformers},
+@inproceedings{rong2024cra,
+  title={CRA-PCN: Point Cloud Completion with Intra-and Inter-level Cross-Resolution Transformers},
   author={Rong, Yi and Zhou, Haoran and Yuan, Lixin and Mei, Cheng and Wang, Jiahao and Lu, Tong},
-  booktitle={Proceedings of the AAAI Conference on artificial intelligence},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
   volume={38},
   number={5},
-  pages={4676-4685},
+  pages={4676--4685},
   year={2024}
 }
 ```
